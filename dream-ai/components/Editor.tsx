@@ -8,7 +8,7 @@ const Editor = ({ entry }) => {
     return (
         <div className="w-full h-full">
             <textarea 
-                className="w-full h-full p-d text-xl" 
+                className="w-full h-full p-d text-xl outline-none" 
                 value={value} 
                 onChange={(e) => setValue(e.target.value)} 
             />
