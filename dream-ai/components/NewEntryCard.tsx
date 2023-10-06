@@ -1,7 +1,16 @@
-'use-client';
+'use client';
+
+import { createNewEntry } from "@/utils/api";
+import { useRouter } from "next/navigation";
+
 
 const NewEntryCard = () => {
-    const handleOnClick = () => {}
+    const router = useRouter();
+
+    const handleOnClick = async () => {
+        const data = await createNewEntry();
+        router.replace(`/journal/${data.id}`);
+    }
 
     return (
         <div className="cursor-pointer overflow-hidden rounded-lg bg-white shadow">

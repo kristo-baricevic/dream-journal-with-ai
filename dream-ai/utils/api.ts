@@ -5,8 +5,8 @@ const createURL = (path) => {
 export const createNewEntry = async () => {
     const res = await fetch(
         new Request(createURL('/api/journal'), {
-        method: 'POST',
-    })
+            method: 'POST',
+        })
     )
 
     if (res.ok) {

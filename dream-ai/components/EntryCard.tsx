@@ -1,6 +1,5 @@
 const EntryCard = ({entry}) => {
     return <div>
-        {entry.id}
     </div>
 }
 
