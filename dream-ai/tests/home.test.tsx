@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react'
-import { vi } from 'vitest'
-import HomePage from '../app/page'
+import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
+import HomePage from '../app/page';
 import { resolve } from 'path'
 
 vi.mock('@clerk/nextjs', () => {
@@ -23,7 +23,13 @@ vi.mock('@clerk/nextjs', () => {
     return mockedFunctions;
 })
 
+vi.mock('next/font/google', () => {
+    return {
+      Inter: () => ({ className: 'inter' }),
+    }
+  })
+
 test(`Home`, async () => {
     render(await HomePage())
-    expect(screen.getByText('Time to explore our dreams!')).toBeTruthy()
+    expect(screen.getByText('get started')).toBeTruthy()
 })
