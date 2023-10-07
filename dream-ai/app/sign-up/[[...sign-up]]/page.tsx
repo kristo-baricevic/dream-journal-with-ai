@@ -1,13 +1,7 @@
-import { SignUp } from '@clerk/nextjs'
+import {SignUp} from '@clerk/nextjs';
 
-export default function SignUpPage() {
-  return (
-    <SignUp
-      path="/sign-up"
-      routing="path"
-      signInUrl="/sign-in"
-      redirectUrl="/new-user"
-      afterSignUpUrl="/new-user"
-    />
-  )
+const SignUpPage = () => {
+    return <SignUp afterSignUpUrl="/new-user" redirectUrl="/new-user" />
 }
+
+export default SignUpPage;
