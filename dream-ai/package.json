@@ -10,9 +10,12 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.25.3",
     "next": "13.5.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-autosave": "^0.4.2",
+    "react-dom": "^18",
+    "recharts": "^2.8.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.3",
