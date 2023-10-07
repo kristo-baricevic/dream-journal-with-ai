@@ -29,6 +29,11 @@ const parser = StructuredOutputParser.fromZodSchema(
             .describe(
             'a hexidecimal color code that represents the mood of the entry. Example #0101fe for blue representing happiness.'
             ),
+        sentimentScore: z
+            .number()
+            .describe(
+              'sentiment of the text and rated on a scale from -10 to 10, where -10 is extremely negative, 0 is neutral, and 10 is extremely positive.'
+            ),
     })
   );
 
@@ -69,7 +74,7 @@ export const qa = async (question, entries) => {
           metadata: { source: entry.id, date: entry.createdAt },
         })
     );
-    
+
     const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' });
     const chain = loadQARefineChain(model);
     const embeddings = new OpenAIEmbeddings();
