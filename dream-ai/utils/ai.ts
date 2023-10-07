@@ -1,15 +1,14 @@
-import { OpenAI } from 'langchain/llms/openai'
-import { PromptTemplate } from 'langchain/prompts'
-import { loadQARefineChain } from 'langchain/chains'
-import { MemoryVectorStore } from 'langchain/vectorstores/memory'
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
-
+import { OpenAI } from 'langchain/llms/openai';
+import { PromptTemplate } from 'langchain/prompts';
+import { loadQARefineChain } from 'langchain/chains';
+import { MemoryVectorStore } from 'langchain/vectorstores/memory';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import {
   StructuredOutputParser,
   OutputFixingParser,
-} from 'langchain/output_parsers'
-import { Document } from 'langchain/document'
-import { z } from 'zod'
+} from 'langchain/output_parsers';
+import { Document } from 'langchain/document';
+import { z } from 'zod';
 
 
 
@@ -31,7 +30,7 @@ const parser = StructuredOutputParser.fromZodSchema(
             'a hexidecimal color code that represents the mood of the entry. Example #0101fe for blue representing happiness.'
             ),
     })
-  )
+  );
 
   const getPrompt = async (content) => {
     const format_instructions = parser.getFormatInstructions()
@@ -41,14 +40,14 @@ const parser = StructuredOutputParser.fromZodSchema(
         'Analyze the following journal entry. Follow the intrusctions and format your response to match the format instructions, no matter what! \n{format_instructions}\n{entry}',
       inputVariables: ['entry'],
       partialVariables: { format_instructions },
-    })
+    });
   
     const input = await prompt.format({
       entry: content,
-    })
+    });
   
     return input
-  }
+  };
 
 export const analyze = async (content) => {
     const input = await getPrompt(content);
@@ -60,7 +59,7 @@ export const analyze = async (content) => {
     } catch (e) {
         console.log(e);
     }
-}
+};
 
 export const qa = async (question, entries) => {
     const docs = entries.map(
@@ -69,16 +68,17 @@ export const qa = async (question, entries) => {
           pageContent: entry.content,
           metadata: { source: entry.id, date: entry.createdAt },
         })
-    )
-    const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
-    const chain = loadQARefineChain(model)
-    const embeddings = new OpenAIEmbeddings()
-    const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
-    const relevantDocs = await store.similaritySearch(question)
+    );
+    
+    const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' });
+    const chain = loadQARefineChain(model);
+    const embeddings = new OpenAIEmbeddings();
+    const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
+    const relevantDocs = await store.similaritySearch(question);
     const res = await chain.call({
       input_documents: relevantDocs,
       question,
-    })
+    });
   
-    return res.output_text
-  }
+    return res.output_text;
+  };
