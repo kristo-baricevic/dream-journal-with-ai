@@ -4,7 +4,12 @@ import { prisma } from "@/utils/db";
 const getData = async () => {
     const user = await getUserByClerkID();
     const analyses = await prisma.analysis.findMany({
-        where: 
+        where: {
+            userId: user.id,
+        },
+        select: {
+            sentimentScore: true,
+        },
     })
 }
 
