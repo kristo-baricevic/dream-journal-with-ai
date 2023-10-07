@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@clerk/clerk-react':
+    specifier: ^4.26.3
+    version: 4.26.3(react@18.2.0)
   '@clerk/nextjs':
     specifier: ^4.25.3
     version: 4.25.3(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
