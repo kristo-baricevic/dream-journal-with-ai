@@ -17,8 +17,6 @@ const getEntries = async () => {
         },
     })
 
-    await analyze('tell me your favorite revolutionary war general, but change their last name to be a planet.');
-
     return entries;
 }
 
