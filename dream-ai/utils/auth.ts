@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs"
 import { prisma } from "./db"
+import type { User } from '@clerk/nextjs/api'
 
 export const getUserByClerkID = async (select = {id: true}) => {
     const {userId} = await auth();

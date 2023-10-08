@@ -1,6 +1,8 @@
 import { prisma } from "@/utils/db";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { User } from "@clerk/nextjs/server";
+import { create } from "domain";
 
 const createNewUser = async () => {
     console.log("test");
