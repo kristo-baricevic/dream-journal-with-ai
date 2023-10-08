@@ -1,10 +1,9 @@
-import { prisma } from "@/utils/db"
-import { currentUser } from "@clerk/nextjs"
-import { User } from "@clerk/nextjs/server";
-import { create } from "domain";
+import { prisma } from "@/utils/db";
+import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 const createNewUser = async () => {
+    console.log("test");
     const user = await currentUser();
 
     const match = await prisma.user.findUnique({
