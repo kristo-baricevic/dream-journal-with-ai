@@ -1,28 +1,28 @@
-import { prisma } from "@/utils/db"
-import { currentUser } from "@clerk/nextjs"
-import { User } from "@clerk/nextjs/server";
-import { create } from "domain";
-import { redirect } from "next/navigation";
+import { prisma } from "@/utils/db";
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation"; 
 
 const createNewUser = async () => {
     const user = await currentUser();
 
-    const match = await prisma.user.findUnique({
-        where: {
-            clerkId: user.id as string,
-        },
-    })
+    if (user) {
+        const match = await prisma.user.findUnique({
+            where: {
+                clerkId: user.id as string,
+            },
+        });
 
-    if (!match) {
-        const newUser = await prisma.user.create({
-            data: {
-                clerkId: user.id,
-                email: user?.emailAddresses[0].emailAddress,
-            }
-        })
+        if (!match) {
+            const newUser = await prisma.user.create({
+                data: {
+                    clerkId: user.id,
+                    email: user?.emailAddresses[0].emailAddress,
+                }
+            });
+        }
+
+        redirect("/journal");
     }
-
-    redirect("/journal");
 }
 
 const NewUser = async () => {
@@ -30,4 +30,4 @@ const NewUser = async () => {
     return <div>...loading</div>
 }
 
-export default NewUser
+export default NewUser;
