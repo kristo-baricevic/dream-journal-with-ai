@@ -21,7 +21,7 @@ export default async function Home() {
           <p className="text-xl text-black mb-4">Explore your dreams!</p>
           <div>
             <Link href={href}>
-              <button className="bg-pink-500 shadow-lg text-white px-4 py-2 rounded-2xl text-xl border-solid border-2 border-black">
+              <button className="bg-pink-400 shadow-lg text-black px-4 py-2 rounded-2xl text-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-pink-500 hover:text-white">
                 get started
               </button>
             </Link>
