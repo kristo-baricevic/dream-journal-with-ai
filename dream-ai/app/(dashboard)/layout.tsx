@@ -9,7 +9,7 @@ const links = [
 ]
 
 const DashboardLayout = ({ children }) => {
-    return <div className="h-screen w-screen relative"> 
+    return <div className="h-screen w-screen relative bg-purple-400"> 
         <aside className="absolute w-[200px] top-0 left-0 h-full border-r border-black/10">
             <div>
                 Mood
