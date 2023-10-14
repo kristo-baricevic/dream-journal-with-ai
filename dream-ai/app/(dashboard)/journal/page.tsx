@@ -25,21 +25,25 @@ const JournalPage = async () => {
     const entries = await getEntries();
 
     return (
-        <div className="p-10 bg-zinc-400/10 h-full border-black/10 h-full">
-            <h2 className="text-3xl mb-8">Journal</h2>
-            <div>
-                <Question />
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-                <NewEntryCard />
-                {entries.map((entry) => (
+        <div className="p-4">
+          <h2 className="text-3xl mb-4">Journal</h2>
+          <div className="mb-4">
+            <Question />
+          </div>
+          <NewEntryCard />
+          <div className="flex justify-center mt-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
+                    {entries.map((entry) => (
                     <Link href={`/journal/${entry.id}`} key={entry.id}>
-                        <EntryCard key={entry.id} entry={entry} />
+                        <div className="flex-grow min-w-[300px] border border-gray-200 rounded-md overflow-hidden shadow-lg">
+                            <EntryCard key={entry.id} entry={entry} />
+                        </div>
                     </Link>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
-    )
+      );
 }
 
 export default JournalPage;
