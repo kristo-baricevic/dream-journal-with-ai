@@ -15,7 +15,7 @@ export default async function Home() {
         backgroundSize: "cover",
         height: "100vh",
     }}> 
-      <div className="bg-white/60 py-10">
+      <div className="bg-white/60 py-10 shadow-xl rounded-xl">
         <div className="px-10 w-full max-w-[600px] mx-auto">
           <h1 className="text-6xl text-black mb-4">Dream Journal</h1>
           <p className="text-xl text-black mb-4">Explore your dreams!</p>
