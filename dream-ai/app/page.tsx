@@ -8,14 +8,24 @@ export default async function Home() {
   let href = userId ? "/journal" : "/new-user";
 
   return (
-    <div className="w-screen h-screen bg-black flex justify-center items-center text-white"> 
-      <div className="w-full max-w-[600px] mx-auto">
-        <h1 className="text-6xl mb-4">Dream Journal</h1>
-        <p className="text-2xl text-white/60 mb-4">Time to explore our dreams!</p>
-        <div>
-          <Link href={href}>
-            <button className="bg-blue-600 px-4 py-2 rounded-lg text-xl">get started</button>
-          </Link>
+    <div 
+      className="w-screen h-screen bg-no-repeat flex justify-center items-center text-white" 
+      style={{
+        backgroundImage: 'url("/clouds.jpeg")',
+        backgroundSize: "cover",
+        height: "100vh",
+    }}> 
+      <div className="bg-white/60 py-10">
+        <div className="px-10 w-full max-w-[600px] mx-auto">
+          <h1 className="text-6xl text-black mb-4">Dream Journal</h1>
+          <p className="text-xl text-black mb-4">Explore your dreams!</p>
+          <div>
+            <Link href={href}>
+              <button className="bg-pink-500 shadow-lg text-white px-4 py-2 rounded-2xl text-xl border-solid border-2 border-black">
+                get started
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
