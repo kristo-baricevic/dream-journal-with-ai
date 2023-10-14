@@ -36,8 +36,8 @@ const Question = () => {
                 <button 
                     disabled={loading}
                     type="submit" 
-                    className="bg-pink-400 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black"
-                >
+                    className="bg-pink-400 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-pink-500 hover:text-white"
+                    >
                     Ask
                 </button>
             </form>
