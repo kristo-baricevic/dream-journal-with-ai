@@ -8,4 +8,44 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
+}
+
+.cloud{ 
+    width:350px;
+    height:120px;
+    background:white;
+    box-shadow: 10px 10px rgba(0,0,0,0.2);
+    border-radius:100px;
+    margin-top:20px;
+    margin-bottom: 90px; 
+    position: relative;
+    z-index: 0;
+}
+.cloud::after, 
+.cloud::before{
+    content:"";
+    position:absolute;
+    display:inline-block;
+    background:inherit;
+    border-radius:inherit;
+    z-index: -1;
+}
+.cloud::after{
+    width:100px;
+    height:100px;
+    top:-30px;
+    left:50px;
+}
+.cloud::before{
+    width:180px;
+    height:180px;
+    top: -70px;
+    left:130px;
+}
+
+.content {
+    position: relative;
+    padding: 20px;
+    z-index: 1;
+}
+

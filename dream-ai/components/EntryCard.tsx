@@ -11,11 +11,15 @@ const EntryCard = ({entry}) => {
 
     
     return (
-        <div className="divide-y divide-gray-200 overflow-hidden bg-white shadow">
-            <div className="px-4 py-5 sm:px-6">{date}</div>
-            <div className="px-4 py-5 sm:p-6 content-truncate">{entry.content}</div>
+        <div className="cloud" >
+            <div className="content">
+                <div className="py-2 px-4 sm:px-6 z-10">{date}</div>
+                <div className="px-4 sm:p-6 content-truncate z-10">{entry.content}</div>
+            </div>             
         </div>
     )
 }
 
 export default EntryCard;
+
+     

@@ -35,7 +35,7 @@ const JournalPage = async () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
                     {entries.map((entry) => (
                     <Link href={`/journal/${entry.id}`} key={entry.id}>
-                        <div className="flex-grow min-w-[300px] border border-gray-200 rounded-md overflow-hidden shadow-lg">
+                        <div>
                             <EntryCard key={entry.id} entry={entry} />
                         </div>
                     </Link>
