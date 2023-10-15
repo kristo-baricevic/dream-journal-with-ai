@@ -15,6 +15,7 @@ const getData = async () => {
 
     const sum = analyses.reduce((all, current) => all + current.sentimentScore, 0);
     const avg = Math.round(sum / analyses.length);
+    console.log("avg");
     return {analyses, avg}
 }
 
