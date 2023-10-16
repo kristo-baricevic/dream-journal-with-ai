@@ -11,11 +11,8 @@ const EntryCard = ({entry}) => {
     const {mood, summary, color, subject, negative} = analysis;
     
     const cloudStyle = {
-        background: lightenColor(color, 20), // Adjust lightness by 20%
+        background: lightenColor(color, 20), 
     };
-    
-
-
     
     return (
         <div className="cloud" style={cloudStyle} >
