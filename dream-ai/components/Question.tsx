@@ -10,7 +10,6 @@ const Question = () => {
 
     const onChange = (e) => {
         setValue(e.target.value);
-        //do things here
     };
 
     const handleSubmit = async (e) => {
