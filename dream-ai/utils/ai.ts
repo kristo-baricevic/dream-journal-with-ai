@@ -10,8 +10,6 @@ import {
 import { Document } from 'langchain/document';
 import { z } from 'zod';
 
-
-
 const parser = StructuredOutputParser.fromZodSchema(
     z.object({
         mood: z
@@ -66,7 +64,7 @@ export const analyze = async (content) => {
     }
 };
 
-export const qa = async (question, entries) => {
+export const qa = async (question: string, entries) => {
     const docs = entries.map(
       (entry) =>
         new Document({

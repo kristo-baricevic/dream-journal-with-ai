@@ -2,7 +2,7 @@
 
 import { lightenColor } from "@/services/colorUtilities";
 import { useState } from "react";
-lightenColor
+
 
 const EntryCard = ({entry}) => {
     const date = new Date(entry.createdAt).toDateString();
