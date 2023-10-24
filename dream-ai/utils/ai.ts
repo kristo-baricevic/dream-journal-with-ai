@@ -9,6 +9,7 @@ import {
 } from 'langchain/output_parsers';
 import { Document } from 'langchain/document';
 import { z } from 'zod';
+import { JournalEntry } from '@prisma/client';
 
 const parser = StructuredOutputParser.fromZodSchema(
     z.object({
@@ -35,7 +36,7 @@ const parser = StructuredOutputParser.fromZodSchema(
     })
   );
 
-  const getPrompt = async (content) => {
+  const getPrompt = async (content: JournalEntry) => {
     const format_instructions = parser.getFormatInstructions()
   
     const prompt = new PromptTemplate({
@@ -52,7 +53,7 @@ const parser = StructuredOutputParser.fromZodSchema(
     return input
   };
 
-export const analyze = async (content) => {
+export const analyze = async (content: JournalEntry) => {
     const input = await getPrompt(content);
     const model = new OpenAI({temperature: 0, modelName: 'gpt-3.5-turbo'});
     const result = await model.call(input);
@@ -64,18 +65,18 @@ export const analyze = async (content) => {
     }
 };
 
-export const qa = async (question: string, entries) => {
+export const qa = async (question: string, entries: JournalEntry[]) => {
     const docs = entries.map(
-      (entry) =>
+      (entry: JournalEntry) =>
         new Document({
           pageContent: entry.content,
           metadata: { source: entry.id, date: entry.createdAt },
         })
     );
 
-    const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' });
-    const chain = loadQARefineChain(model);
-    const embeddings = new OpenAIEmbeddings();
+    const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' }); //initialize model
+    const chain = loadQARefineChain(model); 
+    const embeddings = new OpenAIEmbeddings(); //turn text into vectors
     const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
     const relevantDocs = await store.similaritySearch(question);
     const res = await chain.call({
