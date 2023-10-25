@@ -29,7 +29,7 @@ export const createNewEntry = async () => {
     }
 }
 
-export const askQuestion = async (question: string) => {
+export const askQuestion = async (question, timeout = 5000)) => {
     const res = await fetch(
         new Request(createURL('/api/question'), {
             method: 'POST',
