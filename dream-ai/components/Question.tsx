@@ -1,18 +1,18 @@
 'use client';
 
 import { askQuestion } from "@/utils/api";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 const Question = () => {
     const [value, setValue] = useState('');
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState();
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e) => {
         setValue(e.target.value);
     };
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         const answer = await askQuestion(value);
