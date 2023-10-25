@@ -50,6 +50,7 @@ model Analysis {
   mood           String
   summary        String  @db.Text
   color          String
+  interpretation String  @db.Text
   negative       Boolean
   subject        String
   sentimentScore Float   @default(0)
