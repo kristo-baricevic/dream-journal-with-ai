@@ -4,8 +4,8 @@ import { prisma } from "@/utils/db";
 import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
-export const POST = async (request: NextApiRequest) => {
-    const {question} = await request.body.json();
+export const POST = async (request) => {
+    const {question} = await request.json();
     const user = await getUserByClerkID();
 
     const entries = await prisma.journalEntry.findMany({

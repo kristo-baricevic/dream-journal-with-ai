@@ -66,23 +66,28 @@ export const analyze = async (content: JournalEntry) => {
 };
 
 export const qa = async (question: string, entries: JournalEntry[]) => {
-    const docs = entries.map(
-      (entry: JournalEntry) =>
-        new Document({
-          pageContent: entry.content,
-          metadata: { source: entry.id, date: entry.createdAt },
-        })
+  console.log("test");
+
+  const docs = entries.map(
+    (entry ) => 
+      new Document({
+        pageContent: entry.content,
+        metadata: { source: entry.id, date: entry.createdAt },
+      })
     );
 
-    const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' }); //initialize model
-    const chain = loadQARefineChain(model); 
-    const embeddings = new OpenAIEmbeddings(); //turn text into vectors
-    const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
-    const relevantDocs = await store.similaritySearch(question);
-    const res = await chain.call({
-      input_documents: relevantDocs,
-      question,
-    });
+    console.log(docs);
   
-    return res.output_text;
-  };
+
+  const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' }); //initialize model
+  const chain = loadQARefineChain(model); 
+  const embeddings = new OpenAIEmbeddings(); //turn text into vectors
+  const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
+  const relevantDocs = await store.similaritySearch(question);
+  const res = await chain.call({
+    input_documents: relevantDocs,
+    question,
+  });
+
+  return res.output_text;
+};
