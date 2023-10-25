@@ -17,8 +17,9 @@ const EntryCard = ({entry}) => {
     return (
         <div className="cloud" style={cloudStyle} >
             <div className="content">
-                <div className="py-2 px-4 sm:px-6 z-10">{date}</div>
-                <div className="px-4 sm:p-6 content-truncate z-10">{subject}</div>
+                <div className=" px-4 sm:px-6 z-10 font-serif">{date}</div>
+                <div className="px-4 sm:p-6 content-truncate z-10 font-bold">{subject}</div>
+                <div className=" px-4 content-truncate sm:px-6 z-10 font-serif">{summary}</div>
             </div>             
         </div>
     )

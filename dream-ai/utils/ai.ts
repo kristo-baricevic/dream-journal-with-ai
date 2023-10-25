@@ -10,6 +10,10 @@ import {
 import { Document } from 'langchain/document';
 import { z } from 'zod';
 
+
+//The is the format of the dream journal, which is given to the ai
+//in order to analyze it and render on its individual page.
+
 const parser = StructuredOutputParser.fromZodSchema(
     z.object({
         mood: z
@@ -21,11 +25,11 @@ const parser = StructuredOutputParser.fromZodSchema(
             .describe(
             'is the journal entry negative? (i.e. does it contain negative emotions?).'
             ),
-        subject: z.string().describe('the subject of the journal entry.'), 
+        subject: z.string().describe('a whimsical title for the dream.'), 
         color: z
             .string()
             .describe(
-            'a hexidecimal color code that represents the mood of the entry. Example #0101fe for blue representing happiness.'
+            'a hexidecimal color code that represents the mood of the entry. Example #0101fe for blue representing happiness. Do not use black or gray. Decide between red for angry, yellow for happy, green for weird, blue for sad, purple for exciting or romantic. If an entry does not match these, make it up. Just avoid white, gray, and black.'
             ),
         sentimentScore: z
             .number()
@@ -40,7 +44,7 @@ const parser = StructuredOutputParser.fromZodSchema(
   
     const prompt = new PromptTemplate({
       template:
-        'Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n{format_instructions}\n{entry}',
+        'You are a dream genie. You have magical powers to interpret dreams. Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! When you are done, suggest a song to listen to and a snack to eat. \n{format_instructions}\n{entry}',
       inputVariables: ['entry'],
       partialVariables: { format_instructions },
     });
