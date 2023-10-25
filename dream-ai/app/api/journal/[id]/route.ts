@@ -1,11 +1,9 @@
-import EntryPage from "@/app/(dashboard)/journal/[id]/page";
-import JournalPage from "@/app/(dashboard)/journal/page";
 import { analyze } from "@/utils/ai";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import { NextResponse } from "next/server";
 
-export const PATCH = async ( request: Request, { params } ) => {
+export const PATCH = async ( request: Request, { params }) => {
     const { content } = await request.json();
     const user = await getUserByClerkID();
 
@@ -21,7 +19,7 @@ export const PATCH = async ( request: Request, { params } ) => {
         },
     })
 
-    const analysis = (await analyze(updatedEntry.content);
+    const analysis = (await analyze(updatedEntry.content));
 
 
     const updated = await prisma.analysis.upsert({
