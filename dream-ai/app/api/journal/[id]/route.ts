@@ -42,28 +42,20 @@ export const PATCH = async ( request: Request, { params }) => {
 // Import other necessary modules and functions...
 
 export const DELETE = async (request: Request, { params }) => {
-    const user = await getUserByClerkID();
+    const user = await getUserByClerkID();  
+    console.log("testing delete");
+    console.log(params);
 
-    const entryToDelete = await prisma.journalEntry.findFirst({
+    const deleteEntry = await prisma.journalEntry.delete({
         where: {
-            userId_id: {
-                userId: user.id,
-                id: params.id,
-            },
+            id: params.id,
         },
     });
 
-    if (!entryToDelete) {
-        return NextResponse.error({ message: 'Entry not found', status: 404 });
-    }
-
-    await prisma.journalEntry.delete({
-        where: {
-            id: entryToDelete.id,
-        },
-    });
+    if (!deleteEntry) {
+        console.log("entry not deleted")
+    };
 
     return NextResponse.json({ message: 'Entry deleted successfully' });
-
 
 };

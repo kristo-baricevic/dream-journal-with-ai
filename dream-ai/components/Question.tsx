@@ -9,7 +9,12 @@ const Question = () => {
     const [response, setResponse] = useState();
 
     const onChange = (e) => {
+        if(!e.target.value){
+            setValue("What do all of my dreams have in common? If nothing, say fish.")
+        } else {
         setValue(e.target.value);
+        }
+        console.log("after on change");
     };
 
     const handleSubmit = async (e) => {

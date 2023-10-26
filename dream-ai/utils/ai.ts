@@ -101,30 +101,22 @@ export const qa = async (question, entries) => {
       input_documents: relevantDocs,
       question,
     });
+
+    console.log("after the generation.");
+    console.log(res);
   
     return res.output_text;
   };
 
-  export const aiGenerate = async (question, entries) => {
+  export const aiGenerate = async (question) => {
     console.log("inside ai generate");
     console.log("question", question);
-    const docs = entries.map(
-      (entry) =>
-        new Document({
-          pageContent: entry.content,
-          metadata: { source: entry.id, date: entry.createdAt },
-        })
-    );
 
     const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' });
-    const chain = loadQARefineChain(model);
-    const embeddings = new OpenAIEmbeddings();
-    const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
-    const relevantDocs = await store.similaritySearch(question);
-    const res = await chain.call({
-      input_documents: relevantDocs,
-      question,
-    });
+    const res = await model.call(question);
+
+    console.log("after the generation.");
+    console.log(res);
   
     return res.output_text;
   };
