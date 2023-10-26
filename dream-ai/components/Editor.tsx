@@ -40,7 +40,7 @@ const Editor = ({ entry }) => {
 
         e.preventDefault();
         setIsLoading(true);
-        const prompt = "Please make up a dream of any kind. Have fun with it!";
+        const prompt = "Please make up a dream of any kind. It can be a happy dream or a sad dream, or a fantastical dream. Be silly and use modern references!";
 
         try {
             const res = await generateDream(prompt);
