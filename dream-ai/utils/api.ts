@@ -29,6 +29,21 @@ export const createNewEntry = async () => {
     }
 }
 
+export const deleteEntry = async (id) => {
+    const res = await fetch(
+        new Request(createURL(`/api/journal/${id}`), {
+            method: 'DELETE',
+        })
+    );
+
+    if (res.ok) {
+        return 'Entry deleted successfully';
+    } else {
+        throw new Error('Failed to delete entry');
+    }
+};
+
+
 export const askQuestion = async (question) => {
     const res = await fetch(
         new Request(createURL('/api/question'), {
