@@ -45,9 +45,15 @@ const Editor = ({ entry }) => {
         setIsLoading(false);
       };
 
-    const handleDelete = async () => {
-        // Call the onDelete function or method with the entry ID to delete it
-        await deleteEntry(entry.id);
+    const handleDelete = async (entry) => {
+        try {
+            // Call the onDelete function or method with the entry ID to delete it
+            const res = await deleteEntry(entry.id);
+            console.log("delete response", res);
+            router.push('/');
+        } catch (error) {
+            console.error("Failed to delete entry:", error);
+        }
     };
 
     return (
