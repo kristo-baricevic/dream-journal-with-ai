@@ -58,12 +58,11 @@ export const askQuestion = async (question) => {
     };
 };
 
-export const generateDream = async () => {
-    const question = "please make up a dream";
+export const generateDream = async (question) => {
     const res = await fetch(
         new Request(createURL('/api/generate'), {
             method: 'POST',
-            body: JSON.stringify({question: question}),
+            body: JSON.stringify({question}),
         })
     );
 
@@ -71,4 +70,4 @@ export const generateDream = async () => {
         const data = await res.json();
         return data.data;
     };
-}
+};

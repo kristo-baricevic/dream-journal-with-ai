@@ -37,12 +37,20 @@ const Editor = ({ entry }) => {
     });
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
         setIsLoading(true);
+        const prompt = "Please make up a dream of any kind. Have fun with it!";
 
-        const res = await generateDream();
-        setValue(res);
-        setIsLoading(false);
+        try {
+            const res = await generateDream(prompt);
+            setValue(res);
+        } catch (error) {
+            console.error("Failed to generate dream:", error);
+            setValue("There has been an error!");
+        } finally {
+            setIsLoading(false);
+        }
       };
 
     const handleDelete = async () => {
