@@ -13,8 +13,6 @@ const EntryCard = ({entry} ) => {
 
 
     const { summary, color, subject } = analysis;
-
-    console.log(color);
     
     const cloudStyle = {
         background: lightenColor(color, 35), 
@@ -27,7 +25,7 @@ const EntryCard = ({entry} ) => {
     };
 
     return (
-        <div className="cloud" 
+        <div className="cloud border border-style border-black" 
         style={cloudStyle} 
         >
             <div className="ml-10 py-4">
