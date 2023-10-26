@@ -1,12 +1,16 @@
 'use client';
 
-import { generateDream } from "@/utils/ai";
-import { updatedEntry } from "@/utils/api";
+import { createNewEntry, updatedEntry, generateDream } from "@/utils/api";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAutosave } from "react-autosave";
 
 
+
+
 const Editor = ({ entry }) => {
+    const router = useRouter();
+
     const [value, setValue] = useState(entry.content);
     const [isLoading, setIsLoading] = useState(false);
     const [analysis, setAnalysis] = useState(entry.analysis);
@@ -30,22 +34,28 @@ const Editor = ({ entry }) => {
         },
     });
 
-    const handleButtonClick = async () => {
-        const newDream = generateDream(); 
-        console.log("clicked"); 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        const res = await generateDream();
+        setValue(res);
+        setIsLoading(false);
       };
 
     return (
         <div className="w-full h-full grid grid-cols-3">
             <div className="col-span-2 px-4">
                 <div className="py-4">
-                    <button 
-                        className="bg-pink-400 shadow-lg text-black px-4 py-2 rounded-2xl text-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-pink-500 hover:text-white"
-                        type="button"
-                        onClick={handleButtonClick}
-                    >
-                        Generate a Dream!
-                    </button>                
+                    <form onSubmit={handleSubmit}>
+                        <button 
+                            disabled={isLoading}
+                            type="submit" 
+                            className="bg-pink-400 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-pink-500 hover:text-white"
+                            >
+                                Generate a Dream!
+                        </button>
+                    </form>      
                 </div>
                 {isLoading && <div>...loading</div>}
                 <textarea 

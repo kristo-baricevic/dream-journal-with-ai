@@ -42,3 +42,18 @@ export const askQuestion = async (question) => {
         return data.data;
     };
 };
+
+export const generateDream = async () => {
+    const question = "please make up a dream";
+    const res = await fetch(
+        new Request(createURL('/api/generate'), {
+            method: 'POST',
+            body: JSON.stringify({question: question}),
+        })
+    );
+
+    if (res.ok) {
+        const data = await res.json();
+        return data.data;
+    };
+}

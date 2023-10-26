@@ -19,10 +19,10 @@ const EntryCard = ({entry} ) => {
         <div className="cloud bg-slate-300" 
         // style={cloudStyle} 
         >
-            <div className="content">
-                <div className="px-4 sm:px-6 z-10 font-serif">{date}</div>
-                <div className="px-4 sm:p-6 content-truncate z-10 font-bold">{subject}</div>
-                <div className="px-4 content-truncate sm:px-6 z-10 font-serif">{summary}</div>
+            <div className="ml-10 py-4">
+                <div className="px-4 z-10 font-serif">{date}</div>
+                <div className="px-4 content-truncate z-10 font-bold">{subject}</div>
+                <div className="px-4 content-truncate z-10 font-serif">{summary}</div>
             </div>             
         </div>
     )
