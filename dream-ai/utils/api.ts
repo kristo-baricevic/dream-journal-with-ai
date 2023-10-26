@@ -66,6 +66,8 @@ export const generateDream = async (question) => {
         })
     );
 
+    console.log(res);
+
     if (res.ok) {
         const data = await res.json();
         return data.data;

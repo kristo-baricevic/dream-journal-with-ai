@@ -44,6 +44,7 @@ const Editor = ({ entry }) => {
 
         try {
             const res = await generateDream(prompt);
+            console.log("inside the try catch");
             setValue(res);
         } catch (error) {
             console.error("Failed to generate dream:", error);
