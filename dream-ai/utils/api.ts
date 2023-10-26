@@ -29,6 +29,21 @@ export const createNewEntry = async () => {
     }
 }
 
+export const deleteEntry = async (id) => {
+    const res = await fetch(
+        new Request(createURL(`/api/journal/${id}`), {
+            method: 'DELETE',
+        })
+    );
+
+    if (res.ok) {
+        return 'Entry deleted successfully';
+    } else {
+        throw new Error('Failed to delete entry');
+    }
+};
+
+
 export const askQuestion = async (question) => {
     const res = await fetch(
         new Request(createURL('/api/question'), {
@@ -42,3 +57,18 @@ export const askQuestion = async (question) => {
         return data.data;
     };
 };
+
+export const generateDream = async () => {
+    const question = "please make up a dream";
+    const res = await fetch(
+        new Request(createURL('/api/generate'), {
+            method: 'POST',
+            body: JSON.stringify({question: question}),
+        })
+    );
+
+    if (res.ok) {
+        const data = await res.json();
+        return data.data;
+    };
+}
