@@ -16,8 +16,6 @@ const EntryCard = ({entry} ) => {
         background: lightenColor(color, 35), 
     };
     
-   
-
     return (
         <div className="cloud border border-style border-black" 
             style={cloudStyle}
