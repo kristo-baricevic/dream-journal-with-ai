@@ -4,23 +4,21 @@ import { askQuestion } from "@/utils/api";
 import { useState } from "react";
 
 const Question = () => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState("What do all of my dreams have in common? If nothing, say fish.");
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState();
 
     const onChange = (e) => {
-        if(!e.target.value){
-            setValue("What do all of my dreams have in common? If nothing, say fish.")
-        } else {
         setValue(e.target.value);
-        }
-        console.log("after on change");
+        console.log("after on change has run");
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        console.log("about to askQuestion");
         const answer = await askQuestion(value);
+        console.log("answer is here", answer);
         setResponse(answer);
         setValue("");
         setLoading(false);

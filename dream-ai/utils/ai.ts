@@ -83,7 +83,7 @@ export const analyze = async (content) => {
     }
 };
 
-export const qa = async (question, entries) => {
+export const qa = async (question: string, entries: [{id: string, content: string, createdAt: Date}]) => {
     const docs = entries.map(
       (entry) =>
         new Document({
@@ -91,6 +91,8 @@ export const qa = async (question, entries) => {
           metadata: { source: entry.id, date: entry.createdAt },
         })
     );
+
+    console.log("inside QA");
 
     const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' });
     const chain = loadQARefineChain(model);
@@ -108,7 +110,7 @@ export const qa = async (question, entries) => {
     return res.output_text;
   };
 
-  export const aiGenerate = async (question) => {
+  export const aiGenerate = async (question: string) => {
     console.log("inside ai generate");
     console.log("question", question);
 
@@ -118,5 +120,5 @@ export const qa = async (question, entries) => {
     console.log("after the generation.");
     console.log(res);
   
-    return res.output_text;
+    return res;
   };

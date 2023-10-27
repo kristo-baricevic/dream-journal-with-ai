@@ -12,9 +12,9 @@ const EntryCard = ({entry} ) => {
 
     const { summary, color, subject } = analysis;
     
-    const cloudStyle = {
-        background: lightenColor(color, 35), 
-    };
+    const cloudStyle = analysis
+    ? { background: lightenColor(color, 35) }
+    : { background: 'white' };
     
     return (
         <div className="cloud border border-style border-black" 

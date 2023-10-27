@@ -21,7 +21,7 @@ export const POST = async (request) => {
     });
 
     console.log("runs before aiGen");
-    const answer = await aiGenerate(question, entries);
+    const answer = await aiGenerate(question);
     console.log("answer test without answer");
     console.log("answer test", answer);
 

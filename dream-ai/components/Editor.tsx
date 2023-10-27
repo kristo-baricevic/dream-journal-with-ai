@@ -3,7 +3,7 @@
 import { createNewEntry, updatedEntry, generateDream } from "@/utils/api";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAutosave } from "react-autosave";
+// import { useAutosave } from "react-autosave";
 import { deleteEntry } from "@/utils/api";
 
 
@@ -16,6 +16,8 @@ const Editor = ({ entry }) => {
     const [value, setValue] = useState(entry.content);
     const [isLoading, setIsLoading] = useState(false);
     const [analysis, setAnalysis] = useState(entry.analysis);
+    const [isAnalysisPerformed, setIsAnalysisPerformed] = useState(!!entry.analysis);
+
 
     const {mood, summary, color, interpretation, subject, negative} = analysis;
     const analysisData = [
@@ -26,15 +28,27 @@ const Editor = ({ entry }) => {
         {name: 'Negative', value: negative ? 'True' : 'False'},
     ]
     
-    useAutosave({
-        data: value,
-        onSave: async (_value) => {
+    // useAutosave({
+    //     data: value,
+    //     onSave: async (_value) => {
+    //         setIsLoading(true);
+    //         const data = await updatedEntry(entry.id, _value);
+    //         setAnalysis(data.analysis);
+    //         setIsLoading(false);
+    //     },
+    // });
+
+    const handleSave = async () => {
+        try {
             setIsLoading(true);
-            const data = await updatedEntry(entry.id, _value);
+            const data = await updatedEntry(entry.id, value);
             setAnalysis(data.analysis);
+        } catch (error) {
+            console.error("Failed to save entry:", error);
+        } finally {
             setIsLoading(false);
-        },
-    });
+        }
+    };
 
     const handleSubmit = async (e) => {
 
@@ -72,11 +86,19 @@ const Editor = ({ entry }) => {
                     <div className="py-4">
                         <form onSubmit={handleSubmit}>
                             <button 
-                                disabled={isLoading}
+                                disabled={isLoading || isAnalysisPerformed}
                                 type="submit" 
                                 className="bg-pink-400 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-pink-500 hover:text-white"
                                 >
                                     Generate a Dream!
+                            </button>
+                            <button 
+                                disabled={isLoading}
+                                onClick={handleSave}
+                                type="button"  
+                                className="bg-green-400 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-green-500 hover:text-white"
+                            >
+                                Save
                             </button>
                         </form>      
                     </div>
@@ -119,8 +141,8 @@ const Editor = ({ entry }) => {
                     disabled={isLoading}
                     type="submit" 
                     className="bg-red-500 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-red-900 hover:text-white"
-                    >
-                        DELETE!
+                >
+                    DELETE!
                 </button>
             </div>
         </div>

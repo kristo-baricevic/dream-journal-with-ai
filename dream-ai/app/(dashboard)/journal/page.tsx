@@ -29,7 +29,7 @@ const JournalPage = async () => {
 
     return (
         <div className="p-4">
-          <h2 className="text-3xl mb-4">Journal</h2>
+          <h3 className="text-3xl mb-4 font-seri fade-in">It's Your Dreams That Make You Feel Free, Dream Baby Dream</h3>
           <div className="mb-4">
             <Question />
           </div>

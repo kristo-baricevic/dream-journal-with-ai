@@ -44,7 +44,10 @@ export const deleteEntry = async (id) => {
 };
 
 
-export const askQuestion = async (question) => {
+export const askQuestion = async (question: string) => {
+
+    console.log("question after click", question);
+
     const res = await fetch(
         new Request(createURL('/api/question'), {
             method: 'POST',
@@ -52,13 +55,15 @@ export const askQuestion = async (question) => {
         })
     );
 
+    console.log("question res", res);
+
     if (res.ok) {
         const data = await res.json();
         return data.data;
     };
 };
 
-export const generateDream = async (question) => {
+export const generateDream = async (question: string) => {
     const res = await fetch(
         new Request(createURL('/api/generate'), {
             method: 'POST',
@@ -66,7 +71,7 @@ export const generateDream = async (question) => {
         })
     );
 
-    console.log(res);
+    console.log("test res", res);
 
     if (res.ok) {
         const data = await res.json();
