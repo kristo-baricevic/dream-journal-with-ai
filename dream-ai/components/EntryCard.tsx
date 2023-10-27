@@ -15,8 +15,8 @@ const EntryCard = ({entry} ) => {
 
 
     
-    const cloudStyle = hasAnalysisData
-    ? { background: lightenColor(analysis.color, 35) }
+    const cloudStyle = analysis
+    ? { background: lightenColor(analysis?.color, 35) }
     : { background: 'white' };
     
     return (
@@ -26,11 +26,9 @@ const EntryCard = ({entry} ) => {
             <div className="ml-10 py-4">
                 <div className="px-4 z-10 font-serif">{date}</div>
                 <div className="px-4 content-truncate z-10 font-bold">
-                    {hasAnalysisData ? analysis.subject : 'No title'}
-                </div>
-                <div className="px-4 content-truncate z-10 font-serif">
-                    {hasAnalysisData ? analysis.summary : 'No summary'}
-                </div>
+                    {analysis?.subject}
+                    </div>
+                <div className="px-4 content-truncate z-10 font-serif">{analysis?.summary}</div>
             </div>             
         </div>
     )
