@@ -4,9 +4,9 @@ import { askQuestion } from "@/utils/api";
 import { useState } from "react";
 
 const Question = () => {
-    const [value, setValue] = useState("What do all of my dreams have in common? If nothing, say fish.");
+    const [value, setValue] = useState("Based off of what my dreams have in common, what light phrase of silly encouragement can you give to me? Do not start your response by referencing this response or any previous responses. Begin by starting the analysis, saying the phrase in between these delineators: *** Hello dreamer. Keep dreaming. Your chunk of wisdom from the dreamworld today is: *** and then end with a joke. If there are no entries, start with a salutation and an invitation to explore the dream world together.");
     const [loading, setLoading] = useState(false);
-    const [response, setResponse] = useState();
+    const [response, setResponse] = useState("");
 
     const onChange = (e) => {
         setValue(e.target.value);
@@ -26,8 +26,9 @@ const Question = () => {
 
     return (
         <div className="py-4">
+            <div className="px-2">
             <form onSubmit={handleSubmit}>
-                <input 
+                <input
                     disabled={loading}
                     onChange={onChange}
                     value={value}
@@ -43,8 +44,18 @@ const Question = () => {
                     Ask
                 </button>
             </form>
-            {loading && (<div>...loading</div>)}
-            {response && (<div>{response}</div>)}
+            </div>
+            <div>
+                {loading && (<div>...loading</div>)}
+                <div className="px-2 py-4 font-serif">
+                    {response && (
+                        <div className="bg-slate-100 p-4 rounded-2xl border-solid border-2 border-blue-300">
+                            <p>{response}
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
     )
 }

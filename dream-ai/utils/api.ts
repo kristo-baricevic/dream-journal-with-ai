@@ -52,7 +52,7 @@ export const askQuestion = async (question: string) => {
         new Request(createURL('/api/question'), {
             method: 'POST',
             body: JSON.stringify({ question }),
-        })
+        }),
     );
 
     console.log("question res", res);

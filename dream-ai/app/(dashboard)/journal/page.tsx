@@ -28,7 +28,7 @@ const JournalPage = async () => {
     const entries = await getEntries();
 
     return (
-        <div className="p-4">
+        <div className="px-10">
           <h3 className="text-3xl mb-4 font-seri fade-in">It's Your Dreams That Make You Feel Free, Dream Baby Dream</h3>
           <div className="mb-4">
             <Question />
