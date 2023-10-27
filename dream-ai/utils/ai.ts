@@ -83,7 +83,7 @@ export const analyze = async (content) => {
     }
 };
 
-export const qa = async (question: string, entries: [{id: string, content: string, createdAt: Date}]) => {
+export const qa = async (question: string, entries: {id: string, createdAt: Date, content: string}[]) => {
     const docs = entries.map(
       (entry) =>
         new Document({

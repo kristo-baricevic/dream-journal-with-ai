@@ -29,7 +29,7 @@ export const createNewEntry = async () => {
     }
 }
 
-export const deleteEntry = async (id) => {
+export const deleteEntry = async (id: string) => {
     const res = await fetch(
         new Request(createURL(`/api/journal/${id}`), {
             method: 'DELETE',
