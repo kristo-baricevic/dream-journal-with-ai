@@ -6,14 +6,17 @@ import { useState } from "react";
 
 
 const EntryCard = ({entry} ) => {
+    
     const date = new Date(entry.createdAt).toDateString();
     const [analysis, setAnalysis] = useState(entry.analysis || {});
 
+    const hasAnalysisData = analysis && analysis.summary && analysis.color && analysis.subject;
 
-    const { summary, color, subject } = analysis;
+
+
     
-    const cloudStyle = analysis
-    ? { background: lightenColor(color, 35) }
+    const cloudStyle = hasAnalysisData
+    ? { background: lightenColor(analysis.color, 35) }
     : { background: 'white' };
     
     return (
@@ -22,8 +25,12 @@ const EntryCard = ({entry} ) => {
         >
             <div className="ml-10 py-4">
                 <div className="px-4 z-10 font-serif">{date}</div>
-                <div className="px-4 content-truncate z-10 font-bold">{subject}</div>
-                <div className="px-4 content-truncate z-10 font-serif">{summary}</div>
+                <div className="px-4 content-truncate z-10 font-bold">
+                    {hasAnalysisData ? analysis.subject : 'No title'}
+                </div>
+                <div className="px-4 content-truncate z-10 font-serif">
+                    {hasAnalysisData ? analysis.summary : 'No summary'}
+                </div>
             </div>             
         </div>
     )
