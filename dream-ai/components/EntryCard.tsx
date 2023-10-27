@@ -10,14 +10,10 @@ const EntryCard = ({entry} ) => {
     const date = new Date(entry.createdAt).toDateString();
     const [analysis, setAnalysis] = useState(entry.analysis || {});
 
+
     const hasAnalysisData = analysis && analysis.summary && analysis.color && analysis.subject;
-
-
-
     
-    const cloudStyle = analysis
-    ? { background: lightenColor(analysis?.color, 35) }
-    : { background: 'white' };
+    const cloudStyle = { background: lightenColor(analysis.color, 35) };
     
     return (
         <div className="cloud border border-style border-black" 

@@ -1,4 +1,9 @@
 export function lightenColor(hexColor, percent) {
+
+    if(!hexColor){
+        hexColor = '#ADD8E6';
+    }
+
     // Convert hex color to RGB
     const r = parseInt(hexColor.slice(1, 3), 16);
     const g = parseInt(hexColor.slice(3, 5), 16);
