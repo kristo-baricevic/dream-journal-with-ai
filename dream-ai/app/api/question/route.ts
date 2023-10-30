@@ -4,6 +4,9 @@ import { prisma } from "@/utils/db";
 import { JournalEntry } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
+export const maxDuration = 60;
+
+
 export const POST = async (request: NextRequest) => {
     const {question} = await request.json();
     const user = await getUserByClerkID();

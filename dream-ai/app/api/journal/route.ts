@@ -4,6 +4,9 @@ import { prisma } from "@/utils/db";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
+export const maxDuration = 60;
+
+
 export const POST = async () => {
     const user = await getUserByClerkID();
     const entry = await prisma.journalEntry.create({
