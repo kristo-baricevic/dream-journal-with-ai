@@ -4,7 +4,8 @@ import { prisma } from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import { defer } from "@defer/client";
 
-export const POST = async (request: NextRequest) => {
+
+async function dreamGenerateDefer(request: NextRequest) {
     console.log("test from route");
     const {question} = await request.json();
     const user = await getUserByClerkID();
@@ -28,3 +29,6 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json({ data: answer });
 }
+
+export default defer(dreamGenerateDefer, { concurrency: 2, retry: 2 });
+
