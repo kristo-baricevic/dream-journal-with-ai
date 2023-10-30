@@ -25,6 +25,12 @@ export const POST = async (request: NextRequest) => {
         }
     });
 
+    if (entries) {
+        console.log("entries def received");
+    } else {
+        console.log("maybe no entries!");
+    }
+
     console.log("entries should have been received");
 
     const answer = await qa(question, entries);
