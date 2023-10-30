@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/clerk-react": "^4.26.3",
     "@clerk/nextjs": "^4.25.3",
+    "@defer/client": "^1.13.0",
     "@prisma/client": "^5.4.1",
     "langchain": "^0.0.162",
     "next": "13.5.4",

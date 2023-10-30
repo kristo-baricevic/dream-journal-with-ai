@@ -2,12 +2,9 @@ import { aiGenerate } from "@/utils/ai";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
-
-export const maxDuration = 60;
-export const dynamic = 'force-dynamic';
+import { defer } from "@defer/client";
 
 export const POST = async (request: NextRequest) => {
-    
     console.log("test from route");
     const {question} = await request.json();
     const user = await getUserByClerkID();

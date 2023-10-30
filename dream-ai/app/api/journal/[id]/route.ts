@@ -5,6 +5,7 @@ import { prisma } from "@/utils/db";
 import { NextResponse } from "next/server";
 
 export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
 
 
 export const PATCH = async ( request: Request, { params }) => {
