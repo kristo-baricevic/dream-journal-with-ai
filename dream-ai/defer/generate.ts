@@ -6,7 +6,7 @@ import { defer } from "@defer/client";
 
 
 async function dreamGenerateDefer(question: string) {
-    console.log("test from route");
+    console.log("defer dream() test");
     // const {question} = await request.json();
     // const user = await getUserByClerkID();
     console.log(question);

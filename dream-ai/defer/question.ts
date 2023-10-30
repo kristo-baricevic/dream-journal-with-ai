@@ -10,7 +10,7 @@ async function askQuestionDefer(question: string){
     // const {question} = await request.json();
     const user = await getUserByClerkID();
 
-    console.log("test question", question);
+    console.log("test defer question()", question);
 
     const entries = await prisma.journalEntry.findMany({
         where: {
