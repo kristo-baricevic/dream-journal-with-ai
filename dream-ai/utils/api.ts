@@ -51,7 +51,7 @@ export const askQuestion = async (question: string) => {
     console.log("question after click", question);
 
     const res = await fetch(
-        new Request(createURL('/api/question'), {
+        new Request(createURL('/defer/question'), {
             method: 'POST',
             body: JSON.stringify({ question }),
         }),
