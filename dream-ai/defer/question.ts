@@ -6,11 +6,11 @@ import { JournalEntry } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 
-async function askQuestion(request: NextRequest){
-    const {question} = await request.json();
+async function askQuestionDefer(question: string){
+    // const {question} = await request.json();
     const user = await getUserByClerkID();
 
-    console.log("question", question);
+    console.log("test question", question);
 
     const entries = await prisma.journalEntry.findMany({
         where: {
@@ -30,4 +30,4 @@ async function askQuestion(request: NextRequest){
     return NextResponse.json({ data: answer });
 }
 
-export default defer(askQuestion, { concurrency: 2, retry: 2 });
+export default defer(askQuestionDefer, { concurrency: 2, retry: 2 });

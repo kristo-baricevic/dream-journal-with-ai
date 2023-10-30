@@ -1,3 +1,7 @@
+import generateDreamDefer from "../defer/generate";
+import askQuestionDefer from "../defer/question";
+
+
 const createURL = (path: string) => {
     return window.location.origin + path
 }
@@ -50,33 +54,52 @@ export const askQuestion = async (question: string) => {
 
     console.log("question after click", question);
 
-    const res = await fetch(
-        new Request(createURL('/defer/question'), {
-            method: 'POST',
-            body: JSON.stringify({ question }),
-        }),
-    );
+    // const res = await fetch(
+    //     new Request(createURL('/api/question'), {
+    //         method: 'POST',
+    //         body: JSON.stringify({ question }),
+    //     }),
+    // );
+
+    const res = await askQuestionDefer(question);
 
     console.log("question res", res);
 
-    if (res.ok) {
-        const data = await res.json();
-        return data.data;
-    };
+    // if (res.ok) {
+    //     const data = await res.json();
+    //     return data.data;
+    // };
+
+    if (res) {
+        console.log("success?");
+        return res;
+    } else 
+    
+    return console.log("no res");
 };
 
 export const generateDream = async (question: string) => {
-    const res = await fetch(
-        new Request(createURL('/defer/generate'), {
-            method: 'POST',
-            body: JSON.stringify({question}),
-        })
-    );
+    // const res = await fetch(
+    //     new Request(createURL('/api/generate'), {
+    //         method: 'POST',
+    //         body: JSON.stringify({question}),
+    //     })
+    // );
+
+    const res = await generateDreamDefer(question);
 
     console.log("test res", res);
 
-    if (res.ok) {
-        const data = await res.json();
-        return data.data;
-    };
+    // if (res.ok) {
+    //     const data = await res.json();
+    //     return data.data;
+    // };
+    
+    if (res) {
+        console.log("success?");
+        return res;
+    } else 
+    
+    return console.log("no res");
+
 };

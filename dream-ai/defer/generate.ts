@@ -5,11 +5,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { defer } from "@defer/client";
 
 
-async function dreamGenerateDefer(request: NextRequest) {
+async function dreamGenerateDefer(question: string) {
     console.log("test from route");
-    const {question} = await request.json();
-    const user = await getUserByClerkID();
+    // const {question} = await request.json();
+    // const user = await getUserByClerkID();
     console.log(question);
+    const user = await getUserByClerkID();
+
 
     const entries = await prisma.journalEntry.findMany({
         where: {
