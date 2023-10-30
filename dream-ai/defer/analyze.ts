@@ -79,4 +79,7 @@ export const analyze = async (content) => {
     }
 };
 
-export default defer(analyze);
+export default defer(analyze, {
+    concurrency: 10,
+    retry: 5,
+  });

@@ -14,4 +14,7 @@ export const aiGenerate = async (question: string) => {
     return res;
   };
 
-  export default defer(aiGenerate);
+  export default defer(aiGenerate, {
+    concurrency: 10,
+    retry: 5,
+  });

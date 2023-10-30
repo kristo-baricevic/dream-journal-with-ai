@@ -34,4 +34,7 @@ export const qa = async (question: string, entries: {id: string, createdAt: Date
     return res.output_text;
   };
 
-  export default defer(qa);
+  export default defer(qa, {
+    concurrency: 10,
+    retry: 5,
+  });
