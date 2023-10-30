@@ -1,33 +1,37 @@
-import { qa } from "@/utils/ai";
-import { getUserByClerkID } from "@/utils/auth";
-import { prisma } from "@/utils/db";
 import { defer } from "@defer/client";
-import { JournalEntry } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
+import { OpenAI } from 'langchain/llms/openai';
+import { loadQARefineChain } from 'langchain/chains';
+import { MemoryVectorStore } from 'langchain/vectorstores/memory';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import { Document } from 'langchain/document';
 
 
-async function askQuestionDefer(question: string){
-    // const {question} = await request.json();
-    const user = await getUserByClerkID();
+export const qa = async (question: string, entries: {id: string, createdAt: Date, content: string}[]) => {
+    const docs = entries.map(
+      (entry) =>
+        new Document({
+          pageContent: entry.content,
+          metadata: { source: entry.id, date: entry.createdAt },
+        })
+    );
 
-    console.log("test defer question()", question);
+    console.log("inside QA");
+    console.log("question");
 
-    const entries = await prisma.journalEntry.findMany({
-        where: {
-            userId: user.id,
-        },
-        select: {
-            id: true,
-            content: true,
-            createdAt: true,
-        }
+    const model = new OpenAI({ temperature: 0.8, modelName: 'gpt-3.5-turbo' });
+    const chain = loadQARefineChain(model);
+    const embeddings = new OpenAIEmbeddings();
+    const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
+    const relevantDocs = await store.similaritySearch(question);
+    const res = await chain.call({
+      input_documents: relevantDocs,
+      question,
     });
 
-    console.log("entries should have been received");
+    console.log("after the generation.");
+    console.log(res);
+  
+    return res.output_text;
+  };
 
-    const answer = await qa(question, entries);
-
-    return NextResponse.json({ data: answer });
-}
-
-export default defer(askQuestionDefer, { concurrency: 2, retry: 2 });
+  export default defer(qa);

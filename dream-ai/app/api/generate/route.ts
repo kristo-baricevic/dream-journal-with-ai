@@ -1,4 +1,4 @@
-import { aiGenerate } from "@/utils/ai";
+import { aiGenerate } from "@/defer/generate";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";

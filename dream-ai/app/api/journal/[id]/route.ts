@@ -1,4 +1,4 @@
-import { analyze } from "@/utils/ai";
+import { analyze } from "@/defer/analyze";
 import { deleteEntry } from "@/utils/api";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
