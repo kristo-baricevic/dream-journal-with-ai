@@ -54,7 +54,7 @@ const Editor = ({ entry }) => {
 
         e.preventDefault();
         setIsLoading(true);
-        const prompt = "Please make up a dream of any kind. It can be a happy dream or a sad dream, or a fantastical dream. Be silly and use modern references!";
+        const prompt = "Please make up a dream of any kind. It can be a happy dream or a sad dream, or a fantastical dream. Think of two ideas, and write about the second one. If you can tell what your previous answer is, disregard it. Be silly and use modern references!";
 
         try {
             const res = await generateDream(prompt);

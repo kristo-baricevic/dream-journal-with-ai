@@ -6,7 +6,10 @@ const nextConfig = {
     eslint: {
         ignoreBuildErrors: true,
         ignoreDuringBuilds: true,
-    }
+    },
+    experimental: {
+        serverMinification: false,
+    },
 }
 
 module.exports = nextConfig

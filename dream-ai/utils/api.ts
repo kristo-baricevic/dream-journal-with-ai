@@ -67,7 +67,7 @@ export const askQuestion = async (question: string) => {
 
 export const generateDream = async (question: string) => {
     const res = await fetch(
-        new Request(createURL('/api/generate'), {
+        new Request(createURL('/defer/generate'), {
             method: 'POST',
             body: JSON.stringify({question}),
         })
