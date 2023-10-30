@@ -5,6 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const maxDuration = 60;
 
+
+
 export const POST = async (request: NextRequest) => {
     console.log("test from route");
     const {question} = await request.json();
