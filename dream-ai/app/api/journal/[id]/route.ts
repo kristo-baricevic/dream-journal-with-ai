@@ -53,7 +53,7 @@ export const DELETE = async (request: Request, { params }) => {
     });
 
     if (!deleteEntry) {
-        console.log("entry not deleted")
+        console.log("entry not deleted");
     };
 
     return NextResponse.json({ message: 'Entry deleted successfully' });
