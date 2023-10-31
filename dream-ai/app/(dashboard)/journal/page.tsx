@@ -6,9 +6,6 @@ import Link from "next/link";
 import { analyze } from "@/utils/ai";
 import Question from "@/components/Question";
 
-
-
-
 const getEntries = async () => {
     const user = await getUserByClerkID();
     const entries = await prisma.journalEntry.findMany({
@@ -41,7 +38,7 @@ const JournalPage = async () => {
                 <NewEntryCard />
             </div>
             <div className="flex justify-center">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                     {entries.map((entry) => (
                         <Link href={`/journal/${entry.id}`} key={entry.id}>
                             <div>
