@@ -7,6 +7,8 @@ import { analyze } from "@/utils/ai";
 import Question from "@/components/Question";
 
 
+
+
 const getEntries = async () => {
     const user = await getUserByClerkID();
     const entries = await prisma.journalEntry.findMany({

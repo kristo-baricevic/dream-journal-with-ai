@@ -109,7 +109,15 @@ const Editor = ({ entry }) => {
                             </div>
                         </form>      
                     </div>
-                    {isLoading && <div>...loading</div>}
+                    {isLoading && (
+                        <img src="/spinner.gif" 
+                            alt="Loading..." 
+                            style={{
+                                width: '20px', 
+                                height: '20px',
+                            }}
+                        />
+                    )} 
                     <div className="flex flew-grow h-96">
                         <textarea 
                             className="w-full h-full min-h-full px-4 py-4 text-xl resize-none border-solid border-2 border-black/60 rounded-lg shadow-md" 
