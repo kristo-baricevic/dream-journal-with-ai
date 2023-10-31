@@ -54,7 +54,7 @@ const Editor = ({ entry }) => {
 
         e.preventDefault();
         setIsLoading(true);
-        const prompt = "Please make up a dream of any kind. It can be a happy dream or a sad dream, or a fantastical dream. Think of two ideas, and write about the second one. If you can tell what your previous answer is, disregard it. Be silly and use modern references!";
+        const prompt = "Please make up a dream of any kind. Generate a number between 1 and 5. If the number is 1, the dream should be happy and imaginative. If the number is 2, the dream should be sad and creepy. If the number is 3, the dream should be weird and abstract. If the number is 4, the dream should be about love and passion. If the number is 5, the dream should be about deepest fears. It can be a happy dream or a sad dream, or a fantastical dream. Use modern references!";
 
         try {
             const res = await generateDream(prompt);
@@ -119,7 +119,7 @@ const Editor = ({ entry }) => {
                     </div>
                 </div>
                 
-                <div className="mt-20 flex">
+                <div className="mt-5 flex">
                     <div className="flex">
                         <div className="flex">
                             <ul className="flex flex-wrap items-center justify-center px-4 py-4 gap-4">
