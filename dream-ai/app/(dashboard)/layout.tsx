@@ -2,9 +2,9 @@ import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/journal', label: 'Journal' },
-  { href: '/history', label: 'History' },
+  { href: '/', label: 'Landing Page' },
+  { href: '/journal', label: 'Home' },
+  { href: '/history', label: 'Charts' },
 ];
 
 const DashboardLayout = ({ children }) => {
@@ -16,10 +16,10 @@ const DashboardLayout = ({ children }) => {
           <UserButton />
         </div>
       </header>
-      <nav className="bg-white border-b border-black/10 p-4">
+      <nav className="bg-white border-b border-black/10">
         <ul className="flex space-x-4 justify-center">
           {links.map((link) => (
-            <li key={link.href}>
+            <li className="hover:bg-pink-300 px-4 py-2" key={link.href}>
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
