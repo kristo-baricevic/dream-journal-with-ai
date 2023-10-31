@@ -21,6 +21,7 @@ const RadarChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
 
 
     return (
+        <div>
         <RadarChart outerRadius={90} width={730} height={250} data={moodData}>
             <PolarGrid />
             <PolarAngleAxis dataKey="mood" />
@@ -28,6 +29,7 @@ const RadarChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
             <Radar name="Dreams Per Mood" dataKey="count" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
             <Legend />
         </RadarChart>
+        </div>
     );
 };
 

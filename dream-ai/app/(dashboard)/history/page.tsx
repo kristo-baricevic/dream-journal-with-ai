@@ -24,13 +24,13 @@ const History = async () => {
     const {avg, analyses} = await getData();
     console.log("hi");
     return (
-        <div className="w-full h-full">
+        <div className="w-full h-full bg-pink-100 px-4 py-4">
             <div>{`Avg. Sentiment ${avg}`}</div>
             <div></div>
             <div className="w-full h-full">
                 <HistoryChart data={analyses} />
             </div>
-            <div className="w-full h-full">
+            <div className="w-full h-full flex justify-center py-10">
                 <RadarChart data={analyses} />
             </div>
         </div>
