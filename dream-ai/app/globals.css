@@ -42,6 +42,10 @@
     left:130px;
 }
 
+.cloud:hover{
+    background: rgb(201, 240, 255);
+}
+
 .content {
     position: relative;
     padding: 20px;
