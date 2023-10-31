@@ -54,7 +54,7 @@ const Editor = ({ entry }) => {
 
         e.preventDefault();
         setIsLoading(true);
-        const prompt = "Please make up a dream of any kind. Generate a number between 1 and 5. If the number is 1, the dream should be happy and imaginative. If the number is 2, the dream should be sad and creepy. If the number is 3, the dream should be weird and abstract. If the number is 4, the dream should be about love and passion. If the number is 5, the dream should be about deepest fears. It can be a happy dream or a sad dream, or a fantastical dream. Use modern references!";
+        const prompt = "Please make up a dream of any kind. Generate a number between 1 and 5. If the number is 1, the dream should be happy and imaginative. If the number is 2, the dream should be sad and creepy. If the number is 3, the dream should be weird and abstract. If the number is 4, the dream should be about love and passion. If the number is 5, the dream should be about deepest fears. It can be a happy dream or a sad dream, or a fantastical dream. Use modern references! When you respond with the dream, do not respond by acknowledging this prompt. Just begin writing the dream immediately, as if in a journal.";
 
         try {
             const res = await generateDream(prompt);

@@ -30,7 +30,7 @@ const EntryCard = ({entry, href}) => {
 
     const hasAnalysisData = analysis && analysis.summary && analysis.color && analysis.subject;
     
-    const cloudStyle = { background: lightenColor(analysis.color, 35) };
+    const cloudStyle = { background: lightenColor(analysis.color, 10) };
     
     return (
         <Link href="/journal/[id]" as={href}>
