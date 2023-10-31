@@ -25,31 +25,58 @@ const Question = () => {
     };
 
     return (
-        <div className="flex py-4 justify-center">
-            <div className="flex px-2">
-            <form onSubmit={handleSubmit}>
-                <div className="flex px-2">
-                {/* <input
-                    disabled={loading}
-                    onChange={onChange}
-                    value={value}
-                    type="text" 
-                    placeholder="ask a question" 
-                    className="border border-black/20 px-4 py-2 text-lg rounded-lg shadow-lg"
-                /> */}
-                <button 
-                    disabled={loading}
-                    type="submit" 
-                    className="bg-pink-400 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-pink-500 hover:text-white"
-                    >
-                    Get your analysis!
-                </button>
+        <div className="flex flex-col py-4 justify-center align-middle">
+            <div className="flex flex-wrap justify-center align-middle">
+                <div className="flex flex-wrap px-2 py-2">
+                    <form onSubmit={handleSubmit}>
+                        <div className="flex px-2">
+                        {/* <input
+                            disabled={loading}
+                            onChange={onChange}
+                            value={value}
+                            type="text" 
+                            placeholder="ask a question" 
+                            className="border border-black/20 px-4 py-2 text-lg rounded-lg shadow-lg"
+                        /> */}
+                        <button 
+                            disabled={loading}
+                            type="submit" 
+                            className="bg-pink-400 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-pink-500 hover:text-white"
+                            >
+                            Get your analysis!
+                        </button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div className="flex flex-wrap px-2 py-2">
+                    <form onSubmit={handleSubmit}>
+                        <div className="flex px-2">
+                        {/* <input
+                            disabled={loading}
+                            onChange={onChange}
+                            value={value}
+                            type="text" 
+                            placeholder="ask a question" 
+                            className="border border-black/20 px-4 py-2 text-lg rounded-lg shadow-lg"
+                        /> */}
+                        <button 
+                            disabled={loading}
+                            type="submit" 
+                            className="bg-purple-400 px-4 py-2 rounded-2xl text-lg ml-5 shadow-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-purple-500 hover:text-white"
+                            >
+                            Ask a question!
+                        </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div>
-                {loading && (<div>...loading</div>)}
-                <div className="px-2 py-4 font-serif">
+            <div className="flex">
+                {loading && (
+                    <div className="spinner-overlay">
+                        <img src="/spinner.gif" alt="Loading..." />
+                    </div>
+                )}
+                <div className="px-2 py-2 font-serif">
                     {response && (
                         <div className="bg-slate-100 p-4 rounded-2xl border-solid border-2 border-blue-300">
                             <p>{response}
