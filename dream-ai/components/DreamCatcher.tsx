@@ -11,6 +11,8 @@ type DreamCatcherProps = {
     entries: JournalEntry[]; 
   };
 
+  
+
 const DreamCatcher: React.FC<DreamCatcherProps> = ({ entries = [] }) => {
 
   return (

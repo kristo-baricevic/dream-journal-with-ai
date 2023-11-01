@@ -39,11 +39,11 @@ const EntryCard = ({entry, href}) => {
             >
                 <div className="ml-10 py-4">
                     <div className="px-4 z-10 font-serif">{date}</div>
-                    <div className="px-4 content-truncate z-10 font-bold">
+                    <div className="px-4 content-truncate font-bold">
                         {analysis?.subject}
                         </div>
                         
-                    <div className="px-4 content-truncate z-10 font-serif">{analysis?.summary}</div>
+                    <div className="px-4 content-truncate font-serif">{analysis?.summary}</div>
                         <button 
                             onClick={handleDelete}
                             type="submit" 

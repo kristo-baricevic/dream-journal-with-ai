@@ -22,7 +22,7 @@ const NewEntryCard = () => {
         <div className="cloud cursor-pointer bg-white text-center">
             <div className="px-4 py-5 sm:p-6" onClick={handleOnClick}>
                 {isLoading ? (
-                    <div className="spinner-overlay">
+                    <div className="spinner-overlay z-50">
                         <img src="/spinner.gif" alt="Loading..." />
                     </div>
                 ) : (
