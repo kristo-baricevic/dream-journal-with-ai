@@ -21,8 +21,8 @@ const RadarChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
 
 
     return (
-        <div>
-        <RadarChart outerRadius={90} width={730} height={250} data={moodData}>
+        <div className="px-4">
+        <RadarChart outerRadius={90} width={450} height={275} data={moodData}>
             <PolarGrid />
             <PolarAngleAxis dataKey="mood" />
             <PolarRadiusAxis angle={30} domain={[0, maxCount]} /> 

@@ -2,6 +2,8 @@ import HistoryChart from "@/components/HistoryChart";
 import RadarChart from "@/components/RadarChart";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
+import PieChart from "@/components/PieChart";
+import RadialColorChart from "@/components/RadialColorChart";
 
 const getData = async () => {
     const user = await getUserByClerkID();
@@ -25,13 +27,18 @@ const History = async () => {
     console.log("hi");
     return (
         <div className="w-full h-full bg-pink-100 px-4 py-4">
-            <div>{`Avg. Sentiment ${avg}`}</div>
-            <div></div>
-            <div className="w-full h-full">
-                <HistoryChart data={analyses} />
-            </div>
-            <div className="w-full h-full flex justify-center py-10">
-                <RadarChart data={analyses} />
+            <div className="flex flex-col">
+                <div className="w-full h-full bg-pink-200 px-4 py-4">
+                    <HistoryChart data={analyses} />
+                </div>
+                <div className="flex w-full py-5 gap-2 flex-wrap justify-center bg-pink-300">
+                    <div className="flex py-10 px-2 bg-pink-100 rounded-lg shadow-md">
+                        <RadarChart data={analyses} />
+                    </div>
+                    <div className="flex py-10 px-2 bg-pink-400 rounded-lg shadow-md">
+                        <PieChart data={analyses} />
+                    </div>
+                </div>
             </div>
         </div>
     )
