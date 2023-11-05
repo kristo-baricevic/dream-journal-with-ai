@@ -21,7 +21,7 @@ const Editor = ({ entry }) => {
     const {mood, summary, color, interpretation, subject, negative} = analysis;
     const analysisData = [
         {name: 'Summary', value: summary},
-        {name: 'Subject', value: subject},
+        {name: 'Title', value: subject},
         {name: 'Mood', value: mood}, 
         {name: 'Negative', value: negative ? 'True' : 'False'},
         {name: 'Analysis', value: interpretation}, 
