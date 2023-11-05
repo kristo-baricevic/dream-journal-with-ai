@@ -157,7 +157,7 @@ const Editor = ({ entry }) => {
         "24": "Escaping from a locked room",
         "25": "Meeting your future self",
         "26": "Battling mythical creatures",
-        "27": "Going on a safari",
+        "27": "Losing all my investments",
         "28": "Visiting an underwater city",
         "29": "Participating in a talent show",
         "30": "Witnessing a volcano eruption",
@@ -233,9 +233,7 @@ const Editor = ({ entry }) => {
         "100": "Going on an epic journey",
     };
       
-      
-    
-      
+    // Autosave function currently disabled
 
     // useAutosave({
     //     data: value,
