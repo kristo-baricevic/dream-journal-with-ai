@@ -15,8 +15,7 @@ const Editor = ({ entry }) => {
 
     const [value, setValue] = useState(entry.content);
     const [isLoading, setIsLoading] = useState(false);
-    const [analysis, setAnalysis] = useState(entry.analysis);
-    const [isAnalysisPerformed, setIsAnalysisPerformed] = useState(!!entry.analysis);
+    const [analysis, setAnalysis] = useState(entry.analysis || {});
 
     const {mood, summary, color, interpretation, subject, negative} = analysis;
     const analysisData = [
