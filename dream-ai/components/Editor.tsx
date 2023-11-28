@@ -1,6 +1,6 @@
 'use client';
 
-import { createNewEntry, updatedEntry, generateDream } from "@/utils/api";
+import { updatedEntry, generateDream } from "@/utils/api";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 // import { useAutosave } from "react-autosave";
