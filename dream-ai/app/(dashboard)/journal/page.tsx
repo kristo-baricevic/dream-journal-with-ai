@@ -35,7 +35,7 @@ const JournalPage = async () => {
             <div className="mb-4">
                 <Question />
             </div>
-            <div className="mt-20 flex justify-center">
+            <div className="mt-20 justify-center">
                 <NewEntryCard />
             </div>
             <div className="flex justify-center">

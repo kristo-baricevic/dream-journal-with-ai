@@ -77,3 +77,22 @@
 .fade-in:hover {
 opacity: 1;
 }
+
+@media screen and (max-width: 498px) {
+    .cloud {
+        width:297px;
+        height:102px;
+    }
+    .cloud::after{
+        width:85px;
+        height:85px;
+        top:-25.5px;
+        left:42.5px;
+    }
+    .cloud::before{
+        width:133px;
+        height:133px;
+        top: -59.5px;
+        left:110.5px;
+    }
+}

@@ -37,7 +37,7 @@ const EntryCard = ({entry, href}) => {
             <div className="cloud border border-style border-black" 
                 style={cloudStyle}
             >
-                <div className="ml-10 py-4">
+                <div className="ml-10 flex flex-col">
                     <div className="px-4 z-10 font-serif">{date}</div>
                     <div className="px-4 content-truncate font-bold">
                         {analysis?.subject}
@@ -47,12 +47,12 @@ const EntryCard = ({entry, href}) => {
                         <button 
                             onClick={handleDelete}
                             type="submit" 
-                            className="rounded-full text-sm ml-5 shadow-xl transition duration-300 ease-in-out hover:bg-white hover:text-white"
+                            className="px-4"
                         >
-                        <div>
-                            <img src="https://icons.iconarchive.com/icons/pictogrammers/material/128/trash-can-outline-icon.png" width="24" height="24" />
-                        </div>
-                    </button>
+                            <div>
+                                <img src="https://icons.iconarchive.com/icons/pictogrammers/material/128/trash-can-outline-icon.png" width="24" height="24" />
+                            </div>
+                        </button>
                 </div>             
             </div>
         </Link>
