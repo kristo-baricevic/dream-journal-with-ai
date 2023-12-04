@@ -1,8 +1,9 @@
-import { OpenAI } from 'langchain/llms/openai';
+// import { OpenAI } from 'langchain/llms/openai';
+import { GooglePaLM } from 'langchain/llms/googlepalm';
 import { PromptTemplate } from 'langchain/prompts';
 import { loadQARefineChain } from 'langchain/chains';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import { GooglePaLMEmbeddings } from 'langchain/embeddings/googlepalm';
 import {
   StructuredOutputParser,
   OutputFixingParser,
@@ -73,7 +74,7 @@ const parser = StructuredOutputParser.fromZodSchema(
 
 export const analyze = async (content) => {
     const input = await getPrompt(content);
-    const model = new OpenAI({temperature: 0, modelName: 'gpt-3.5-turbo'});
+    const model = new GooglePaLM({temperature: 0, modelName: 'gpt-3.5-turbo'});
     const result = await model.call(input);
 
     try {
@@ -95,9 +96,9 @@ export const qa = async (question: string, entries: {id: string, createdAt: Date
     console.log("inside QA");
     console.log("question");
 
-    const model = new OpenAI({ temperature: 0.8, modelName: 'gpt-3.5-turbo' });
+    const model = new GooglePaLM({ temperature: 0.8, modelName: 'gpt-3.5-turbo' });
     const chain = loadQARefineChain(model);
-    const embeddings = new OpenAIEmbeddings();
+    const embeddings = new GooglePaLMEmbeddings();
     const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
     const relevantDocs = await store.similaritySearch(question);
     const res = await chain.call({
