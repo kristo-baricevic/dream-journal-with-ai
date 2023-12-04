@@ -1,5 +1,6 @@
 // import { OpenAI } from 'langchain/llms/openai';
 import { GooglePaLM } from 'langchain/llms/googlepalm';
+import { GooglePaLMEmbeddings } from 'langchain/embeddings/googlepalm';
 import { PromptTemplate } from 'langchain/prompts';
 import { loadQARefineChain } from 'langchain/chains';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
@@ -74,14 +75,18 @@ const parser = StructuredOutputParser.fromZodSchema(
 
 export const analyze = async (content) => {
     const input = await getPrompt(content);
-    const model = new GooglePaLM({temperature: 0, modelName: 'gpt-3.5-turbo'});
-    const result = await model.call(input);
+    const model = new GooglePaLMEmbeddings({
+      apiKey: `${PALM_API_KEY}`,
+      modelName: 'gpt-3.5-turbo'});
 
-    try {
-        return parser.parse(result);
-    } catch (e) {
-        console.log(e);
-    }
+    const result = await model.embedQuery(input);
+
+      try {
+          console.log({ result });
+          return parser.parse(result);
+      } catch (e) {
+          console.log(e);
+      }
 };
 
 export const qa = async (question: string, entries: {id: string, createdAt: Date, content: string}[]) => {
