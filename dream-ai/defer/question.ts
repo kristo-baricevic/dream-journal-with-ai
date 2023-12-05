@@ -1,7 +1,5 @@
 import { defer } from "@defer/client";
-// import { OpenAI } from 'langchain/llms/openai';
-import { VertexAI } from 'langchain/llms/vertexai';
-import { GooglePaLMEmbeddings } from "langchain/embeddings/googlepalm";
+import { OpenAI } from 'langchain/llms/openai';
 import { loadQARefineChain } from 'langchain/chains';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
@@ -20,9 +18,9 @@ export const qa = async (question: string, entries: {id: string, createdAt: Date
     console.log("inside QA");
     console.log("question");
 
-    const model = new VertexAI({ temperature: 0.8, modelName: 'text-bison-001' });
+    const model = new OpenAI({ temperature: 0.8, modelName: 'gpt-3.5-turbo' });
     const chain = loadQARefineChain(model);
-    const embeddings = new GooglePaLMEmbeddings();
+    const embeddings = new OpenAIEmbeddings();
     const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
     const relevantDocs = await store.similaritySearch(question);
     const res = await chain.call({
