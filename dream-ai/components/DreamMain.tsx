@@ -36,14 +36,14 @@ const DreamMain: React.FC<DreamMainProps> = ({ entries = [] }) => {
             </div>
                 <div className="flex justify-center" onClick={handleOnClick}>
                     <div>
-                    {isLoading ? (
-                        <div className="spinner-overlay">
-                            <img src="/spinner.gif" alt="Loading..." />
-                        </div>
-                        ) : (<NewEntryCard />)
-                    }
+                        {isLoading ? (
+                            <div className="spinner-overlay">
+                                <img src="/spinner.gif" alt="Loading..." />
+                            </div>
+                            ) : (<NewEntryCard />)
+                        }
+                    </div>
                 </div>
-            </div>
             <div className="flex justify-center">
                 <DreamCatcher entries={entries}/>
             </div>

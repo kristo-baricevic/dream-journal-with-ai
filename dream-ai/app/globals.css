@@ -61,7 +61,8 @@
 }
 
 .cloud:hover{
-    background: rgb(201, 240, 255);
+    background: rgb(87, 207, 255);
+    opacity: 0.5;
 }
 
 .content {
