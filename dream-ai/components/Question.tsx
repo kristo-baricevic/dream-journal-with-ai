@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { askQuestion } from "@/utils/api";
 import { useState } from "react";
@@ -102,13 +102,13 @@ const Question = () => {
                     </div>
                 )}
             </div>
-            <div className="flex">
+            <div className="flex py-2">
                 {loading && (
                     <div className="spinner-overlay">
                         <img src="/spinner.gif" alt="Loading..." />
                     </div>
                 )}
-                <div className="px-2 py-2 font-serif">
+                <div className="px-2 py-6 font-serif">
                     {response && (
                         <div className="bg-slate-100 p-4 rounded-2xl border-solid border-2 border-blue-300">
                             <p>{response}

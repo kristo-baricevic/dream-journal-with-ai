@@ -38,7 +38,7 @@ const EntryCard = ({entry, href}) => {
                 style={cloudStyle}
             >
                 <div className="ml-10 flex flex-col">
-                    <div className="px-4 z-10 font-serif">{date}</div>
+                    <div className="px-4 font-serif">{date}</div>
                     <div className="px-4 content-truncate font-bold">
                         {analysis?.subject}
                         </div>

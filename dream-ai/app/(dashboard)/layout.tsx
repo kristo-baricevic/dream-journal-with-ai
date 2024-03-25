@@ -12,7 +12,7 @@ const DashboardLayout = ({ children }) => {
     <div className="min-h-screen bg-pink-100">
       <header className="bg-white border-b border-black/10">
         <div className="bg-pink-200 flex justify-between items-center max-w-screen-xl mx-auto p-4">
-          <h1 className="text-xl">Dream-AI</h1>
+          <h1 className="text-xl">Dream With AI</h1>
           <UserButton />
         </div>
       </header>

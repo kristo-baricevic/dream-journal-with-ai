@@ -12,8 +12,6 @@ export const POST = async (request: NextRequest) => {
     const {question} = await request.json();
     const user = await getUserByClerkID();
 
-    console.log("question", question);
-
     const entries = await prisma.journalEntry.findMany({
         where: {
             userId: user.id,
@@ -24,14 +22,6 @@ export const POST = async (request: NextRequest) => {
             createdAt: true,
         }
     });
-
-    if (entries) {
-        console.log("entries def received");
-    } else {
-        console.log("maybe no entries!");
-    }
-
-    console.log("entries should have been received");
 
     const answer = await qa(question, entries);
 
