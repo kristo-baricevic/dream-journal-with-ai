@@ -118,7 +118,7 @@ const Question = () => {
                 {loading && (
                     <div className="spinner-overlay">
                         <img src="/spinner.gif" alt="Loading..." />
-                        <p> The doctor is thinking. This make take a moment!</p>
+                        <p> ...The doctor is thinking. This may take a moment!</p>
                     </div>
                 )}
                 <div className="px-2 py-6 font-serif">
