@@ -5,8 +5,8 @@ const NewEntryCard = () => {
     return (
         <div className="flex align-middle justify-center">
             <div className="flex align-middle justify-center cloud cursor-pointer bg-white text-center">
-                <div className="p-6">
-                    <span className="text-3xl">Click to Make a New Entry</span>
+                <div className="mt-4 p-6">
+                    <span className="text-2xl">Click to Make a New Entry</span>
                 </div>
             </div>
         </div>

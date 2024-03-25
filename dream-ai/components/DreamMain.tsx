@@ -16,7 +16,6 @@ type DreamMainProps = {
 };
 
 const DreamMain: React.FC<DreamMainProps> = ({ entries = [] }) => {
-
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
