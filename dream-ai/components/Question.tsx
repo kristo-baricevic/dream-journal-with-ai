@@ -4,7 +4,7 @@ import { askQuestion } from "@/utils/api";
 import { useState } from "react";
 
 const Question = () => {
-    const [value, setValue] = useState("Look for a pattern in the Summary of five recent dream entries. What you conclude about me based off of these dream entries? Can you offer some advice and a prayer to the Dream Gods to help? Do not start your response by referencing this response or any previous responses. Avoid phrases such as in light of the new context. Begin by starting the analysis, saying the phrase in after these delineators *** Hello dreamer. Keep dreaming. Your chunk of wisdom from the dreamworld today is: *** and then end with a joke related to your analysis.");
+    const [value, setValue] = useState("You are an eccentric professor. Look for a pattern in the Summary of five recent dream entries. Draw some conclusions about the dreamer based off the totality of the dream experiences. Provide to the dreamer advice for how they can adapt their life to incorporate their dreams meanings. Do not start your response by referencing this response or any previous responses. Avoid phrases such as 'in light of the new context'. Begin immediately by starting the analysis, saying the phrase in after these delineators *** Hello dreamer. Keep dreaming. You wisdom from the dreamworld today is: *** End by picking a number between 1 and 5. If 1, suggest a song to listen to based off a dream. If 2, suggest a meditation. If 3, suggest a food to eat. If 4, suggest an activity. If 5, suggest a journal prompt.");
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
     const [isQuestion, setIsQuestion] = useState(false);

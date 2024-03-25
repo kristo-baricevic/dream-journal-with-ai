@@ -23,10 +23,8 @@ const EntryCard = ({entry, href}) => {
         }
     };
 
-
     const date = new Date(entry.createdAt).toDateString();
     const [analysis, setAnalysis] = useState(entry.analysis || {});
-
 
     const hasAnalysisData = analysis && analysis.summary && analysis.color && analysis.subject;
     
