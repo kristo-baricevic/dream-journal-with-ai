@@ -10,7 +10,7 @@ type AnalysisData = {
 };
 
 const PieChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
-    const uniqueColors: string[] = [...new Set(data.map((item: AnalysisData) => item.color))];
+    const uniqueColors: string[] = Array.from(new Set(data.map((item: AnalysisData) => item.color)));
     console.log("unique colors are", uniqueColors);
 
     const colorData = uniqueColors.map((color) => {
@@ -26,19 +26,22 @@ const PieChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
     console.log("colorData", colorData);
 
     return (
-        <div>
-            <PieChart width={450} height={250}>
-                <Pie
-                    dataKey="value"
-                    data={colorData}
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={50}
-                    fill="#8884d8"
-                />
-            </PieChart>
-        </div>
+        <>
+            <div className="flex flex-col text-center">
+                <h1 className="flex justify-center text-center">Dreams by Color Analysis</h1>
+                <PieChart width={450} height={250}>
+                    <Pie
+                        dataKey="value"
+                        data={colorData}
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={100}
+                        fill="#8884d8"
+                    />
+                </PieChart>
+            </div>
+        </>
     );
 };
 

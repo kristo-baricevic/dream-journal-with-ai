@@ -10,7 +10,7 @@ type AnalysisData = {
 };
 
 const RadarChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
-    const uniqueMoods: string[] = [...new Set(data.map((item: AnalysisData) => item.mood))];
+    const uniqueMoods: string[] = Array.from(new Set(data.map((item: AnalysisData) => item.mood)));
 
     const moodData = uniqueMoods.map((mood, index) => {
         const count = data.filter((item) => item.mood === mood).length;
@@ -21,7 +21,7 @@ const RadarChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
 
 
     return (
-        <div className="px-4">
+        <div className="flex px-4">
         <RadarChart outerRadius={90} width={340} height={275} data={moodData}>
             <PolarGrid />
             <PolarAngleAxis dataKey="mood" />

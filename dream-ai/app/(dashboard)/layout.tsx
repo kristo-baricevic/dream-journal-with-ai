@@ -7,7 +7,11 @@ const links = [
   { href: '/history', label: 'Charts' },
 ];
 
-const DashboardLayout = ({ children }) => {
+type DashboardLayoutProps<T = {}> = {
+  children: React.ReactNode;
+} & T;
+
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-pink-100">
       <header className="bg-white border-b border-black/10">
