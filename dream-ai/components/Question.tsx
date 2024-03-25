@@ -4,22 +4,37 @@ import { askQuestion } from "@/utils/api";
 import { useState } from "react";
 
 const Question = () => {
-    const [value, setValue] = useState("You are an eccentric professor. Look for a pattern in the Summary of five recent dream entries. Draw some conclusions about the dreamer based off the totality of the dream experiences. Provide to the dreamer advice for how they can adapt their life to incorporate their dreams meanings. Do not start your response by referencing this response or any previous responses. Avoid phrases such as 'in light of the new context'. Begin immediately by starting the analysis, saying the phrase in after these delineators *** Hello dreamer. Keep dreaming. You wisdom from the dreamworld today is: *** End by picking a number between 1 and 5. If 1, suggest a song to listen to based off a dream. If 2, suggest a meditation. If 3, suggest a food to eat. If 4, suggest an activity. If 5, suggest a journal prompt.");
+    const [value, setValue] = useState("You are an eccentric professor. " +
+    "Look for a pattern in the Summary of five recent dream entries. " +
+    "Draw some conclusions about the dreamer based off the totality of " +
+    "the dream experiences. Provide to the dreamer advice for how they " +
+    "can adapt their life to incorporate their dreams meanings. " + 
+    "Do not start your response by referencing this response or any " + 
+    "previous responses. Avoid phrases such as 'in light of the new context'. " +
+    "Begin immediately by starting the analysis. Then, " + 
+    "think of a random number between 1 and 5. Keep the number to yourself." +
+    "Do not share the number the picked. " +
+    "Instead, use the number to inform how you end the assessment." +
+    "End with a piece of advice that starts with the phrase " + 
+    "'The dream gods want you to '" + 
+    "and then do one of the following:" +
+    "If the number is 1, end by suggesting a song to listen to based off a dream. " +
+    "If the number is 2, end by suggesting a mantra for meditation. " +
+    "If the number is 3, end by suggesting a food to eat. " +
+    "If the number is 4, end by suggesting an activity. " +
+    "If the number is 5, end by suggesting a journal prompt.");
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
     const [isQuestion, setIsQuestion] = useState(false);
 
     const onChange = (e) => {
         setValue(e.target.value);
-        console.log("after on change has run");
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        console.log("about to askQuestion");
         const answer = await askQuestion(value);
-        console.log("answer is here", answer);
         setResponse(answer);
         setValue("");
         setLoading(false);
@@ -29,16 +44,13 @@ const Question = () => {
         e.preventDefault();
         setLoading(true);
         setIsQuestion(!isQuestion);
-        console.log("testing boolean", isQuestion);
         setLoading(false);
     };
 
     const handleSubmitQuestion = async (e) => {
         e.preventDefault();
         setLoading(true);
-        console.log("about to askQuestion");
         const answer = await askQuestion(value);
-        console.log("answer is here", answer);
         setResponse(answer);
         setValue("");
         setLoading(false);
@@ -102,10 +114,11 @@ const Question = () => {
                     </div>
                 )}
             </div>
-            <div className="flex py-2">
+            <div className="py-2">
                 {loading && (
                     <div className="spinner-overlay">
                         <img src="/spinner.gif" alt="Loading..." />
+                        <p> The doctor is thinking. This make take a moment!</p>
                     </div>
                 )}
                 <div className="px-2 py-6 font-serif">
