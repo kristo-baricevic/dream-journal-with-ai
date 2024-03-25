@@ -33,7 +33,7 @@ const JournalPage = async () => {
                     <LyricIterator />
                 </h3>
             </div>
-           <div>
+           <div className="flex flex-col">
                 <DreamMain entries={entries} />
            </div>
         </div>

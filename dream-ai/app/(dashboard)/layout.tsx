@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }) => {
           ))}
         </ul>
       </nav>
-      <main className="max-w-screen-xl mx-auto p-4">
+      <main className="max-w-screen-xl mx-auto p-2">
         {children}
       </main>
     </div>
