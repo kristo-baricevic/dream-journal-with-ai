@@ -28,11 +28,6 @@ const JournalPage = async () => {
 
     return (
         <div className="px-10">
-            <div className="flex justify-center p-2">
-                <h3 className="mb-4 font-serif fade-in">
-                    <LyricIterator />
-                </h3>
-            </div>
            <div className="flex flex-col">
                 <DreamMain entries={entries} />
            </div>
