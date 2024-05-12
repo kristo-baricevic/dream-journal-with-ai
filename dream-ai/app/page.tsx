@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { auth } from "@clerk/nextjs";
-
+import { auth } from "@clerk/nextjs/server";
 
 export default async function Home() {
   const {userId} = await auth ();

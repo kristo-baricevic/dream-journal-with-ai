@@ -1,4 +1,3 @@
-import { defer } from "@defer/client";
 import { OpenAI } from 'langchain/llms/openai';
 
 export const aiGenerate = async (question: string) => {
@@ -12,9 +11,4 @@ export const aiGenerate = async (question: string) => {
     console.log(res);
   
     return res;
-  };
-
-  export default defer(aiGenerate, {
-    concurrency: 10,
-    retry: 5,
-  });
+};

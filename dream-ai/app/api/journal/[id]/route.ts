@@ -1,4 +1,4 @@
-import { analyze } from "@/defer/analyze";
+import { analyze } from "@/utils/analyze";
 import { deleteEntry } from "@/utils/api";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
@@ -8,7 +8,7 @@ export const maxDuration = 120;
 export const dynamic = 'force-dynamic';
 
 
-export const PATCH = async ( request: Request, { params }) => {
+export const PATCH = async ( request: Request, { params }: any) => {
     const { content } = await request.json();
     const user = await getUserByClerkID();
 
@@ -44,7 +44,7 @@ export const PATCH = async ( request: Request, { params }) => {
 
 // Import other necessary modules and functions...
 
-export const DELETE = async (request: Request, { params }) => {
+export const DELETE = async (request: Request, { params }: any) => {
     const user = await getUserByClerkID();  
     console.log("testing delete");
     console.log(params);

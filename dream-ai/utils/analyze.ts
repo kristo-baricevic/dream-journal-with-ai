@@ -5,7 +5,6 @@ import {
   OutputFixingParser,
 } from 'langchain/output_parsers';
 import { z } from 'zod';
-import { defer } from '@defer/client';
 
 //The is the format of the dream journal, which is given to the ai
 //in order to analyze it and render on its individual page.
@@ -50,7 +49,7 @@ const parser = StructuredOutputParser.fromZodSchema(
     })
   );
 
-  const getPrompt = async (content) => {
+  const getPrompt = async (content: any) => {
     const format_instructions = parser.getFormatInstructions()
   
     const prompt = new PromptTemplate({
@@ -67,7 +66,7 @@ const parser = StructuredOutputParser.fromZodSchema(
     return input
   };
 
-export const analyze = async (content) => {
+export const analyze = async (content: any) => {
     const input = await getPrompt(content);
     const model = new OpenAI({temperature: 0, modelName: 'gpt-3.5-turbo'});
     const result = await model.call(input);
@@ -78,8 +77,3 @@ export const analyze = async (content) => {
         console.log(e);
     }
 };
-
-export default defer(analyze, {
-    concurrency: 10,
-    retry: 5,
-  });

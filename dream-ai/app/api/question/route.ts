@@ -1,4 +1,4 @@
-import { qa } from "@/defer/question";
+import { qa } from "@/utils/question";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import { JournalEntry } from "@prisma/client";

@@ -1,10 +1,10 @@
-// import { OpenAI } from 'langchain/llms/openai';
-import { GooglePaLM } from 'langchain/llms/googlepalm';
-import { GooglePaLMEmbeddings } from 'langchain/embeddings/googlepalm';
+import { OpenAI } from 'langchain/llms/openai';
+// import { GooglePaLM } from 'langchain/llms/googlepalm';
+// import { GooglePaLMEmbeddings } from 'langchain/embeddings/googlepalm';
 import { PromptTemplate } from 'langchain/prompts';
 import { loadQARefineChain } from 'langchain/chains';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
-import { GooglePaLMEmbeddings } from 'langchain/embeddings/googlepalm';
+// import { GooglePaLMEmbeddings } from 'langchain/embeddings/googlepalm';
 import {
   StructuredOutputParser,
   OutputFixingParser,
@@ -56,7 +56,7 @@ const parser = StructuredOutputParser.fromZodSchema(
     })
   );
 
-  const getPrompt = async (content) => {
+  const getPrompt = async (content: any) => {
     const format_instructions = parser.getFormatInstructions()
   
     const prompt = new PromptTemplate({
