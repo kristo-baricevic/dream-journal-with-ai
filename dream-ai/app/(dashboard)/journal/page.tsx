@@ -3,7 +3,6 @@ import NewEntryCard from "@/components/NewEntryCard";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import DreamMain from "@/components/DreamMain";
-import LyricIterator from "@/components/LyricIterator";
 
 const getEntries = async () => {
     const user = await getUserByClerkID();

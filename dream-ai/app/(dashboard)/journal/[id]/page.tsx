@@ -6,7 +6,7 @@ import { JournalEntry } from "@prisma/client";
 
 
 
-const getEntry = async (id) => {
+const getEntry = async (id: any) => {
     const user = await getUserByClerkID();
     const entry = await prisma.journalEntry.findUnique({
         where: {
@@ -24,7 +24,7 @@ const getEntry = async (id) => {
 }
 
 
-const EntryPage = async ({ params } ) => { 
+const EntryPage = async ({ params }: any ) => { 
     const entry = await getEntry(params.id);
 
     return (

@@ -3,7 +3,6 @@ import RadarChart from "@/components/RadarChart";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import PieChart from "@/components/PieChart";
-import RadialColorChart from "@/components/RadialColorChart";
 
 const getData = async () => {
     const user = await getUserByClerkID();
