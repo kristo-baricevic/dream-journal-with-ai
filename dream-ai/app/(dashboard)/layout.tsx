@@ -14,7 +14,7 @@ type DashboardLayoutProps<T = {}> = {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-pink-100 background-main font-sans">
-      <header className="bg-white border-b border-black/10">
+      <header className="bg-white border-b border-black/10 sticky">
         <div className="bg-pink-200 flex justify-between items-center max-w-screen-xl mx-auto p-4 gradient">
           <h1 className="text-2xl">Dream With AI</h1>
           <UserButton />
