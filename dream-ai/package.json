@@ -10,12 +10,12 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@clerk/clerk-react": "^4.31.1",
     "@clerk/clerk-sdk-node": "^5.0.5",
-    "@clerk/nextjs": "^5.0.7",
+    "@clerk/nextjs": "^5.0.12",
     "@defer/client": "^1.15.0",
     "@google-ai/generativelanguage": "^1.1.0",
-    "@prisma/client": "^5.13.0",
+    "@prisma/client": "^5.14.0",
+    "dotenv": "^16.4.5",
     "google-auth-library": "^9.9.0",
     "langchain": "^0.0.162",
     "mysql2": "^3.9.7",

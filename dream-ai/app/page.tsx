@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 
+
 export default async function Home() {
-  const {userId} = await auth ();
+  const { userId } : { userId: string | null } = auth();
+  console.log("Test", userId);
 
   let href = userId ? "/journal" : "/new-user";
 

@@ -15,16 +15,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
   return (
-    <ClerkProvider>
-      <html lang="en">
-        
+    <html lang="en">
+      <ClerkProvider publishableKey={publishableKey}>
         <body className={inter.className}>
-          
-          {children}
-          
+            {children}
         </body>
-      </html>
-    </ClerkProvider>
+      </ClerkProvider>
+    </html>
   )
 }
