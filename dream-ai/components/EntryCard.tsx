@@ -1,26 +1,21 @@
 'use client';
 
 import { lightenColor } from "@/services/colorUtilities";
-import { deleteEntry } from "@/utils/api";
 import { JournalEntry } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
 
+type EntryCardProps = {
+    entry: JournalEntry;
+    href: string;
+    onDelete: (id: string) => void;
+};
 
 
-const EntryCard = ({entry, href}) => {
-
-    const handleDelete = async (e) => {
+const EntryCard = ({entry, href, onDelete}: any ) => {
+    const handleDelete = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        
-        try {
-            // Call delete with the entry ID to delete it
-            const res = await deleteEntry(entry.id);
-            console.log("delete response", res);
-            location.reload();
-        } catch (error) {
-            console.error("Failed to delete entry:", error);
-        }
+        onDelete(entry.id);
     };
 
     const date = new Date(entry.createdAt).toDateString();
@@ -39,8 +34,7 @@ const EntryCard = ({entry, href}) => {
                     <div className="px-4 font-serif">{date}</div>
                     <div className="px-4 content-truncate font-bold">
                         {analysis?.subject}
-                        </div>
-                        
+                    </div>
                     <div className="px-4 content-truncate font-serif">{analysis?.summary}</div>
                         <button 
                             onClick={handleDelete}

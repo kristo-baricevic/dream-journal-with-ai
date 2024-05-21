@@ -8,7 +8,13 @@ const isPublic = createRouteMatcher([
 ]);
 
 export default clerkMiddleware((auth, req) => {
-  if (!isPublic(req)) auth().protect();
+  console.log('Request URL:', req.url);
+  console.log('Is Public:', isPublic(req));
+  
+  if (!isPublic(req)) {
+    console.log('Request is protected. Authenticating...');
+    auth().protect();
+  }
 });
 
 export const config = {

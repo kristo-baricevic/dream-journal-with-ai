@@ -7,9 +7,6 @@ import { useState } from "react";
 import { deleteEntry } from "@/utils/api";
 
 
-
-
-
 const Editor = ({ entry }: any) => {
     const router = useRouter();
 
@@ -258,7 +255,7 @@ const Editor = ({ entry }: any) => {
 
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
 
         e.preventDefault();
         setIsLoading(true);
@@ -343,7 +340,7 @@ const Editor = ({ entry }: any) => {
                     </div>
                 </div>
                 
-                <div className="mt-5 flex">
+                <div className="mt-5 flex justify-center items-center">
                     <div className="flex">
                         <div className="flex">
                             <ul className="flex flex-wrap items-center justify-center px-4 py-4 gap-4">

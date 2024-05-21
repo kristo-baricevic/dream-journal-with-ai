@@ -17,7 +17,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       <header className="bg-white border-b border-black/10 sticky">
         <div className="bg-pink-200 flex justify-between items-center max-w-screen-xl mx-auto p-4 gradient">
           <h1 className="text-2xl">Dream With AI</h1>
-          <UserButton />
+          <UserButton
+            afterSignOutUrl="/"
+          />
         </div>
       </header>
       <nav className="bg-white border-b border-black/10">
