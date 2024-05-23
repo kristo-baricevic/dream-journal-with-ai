@@ -26,6 +26,9 @@ dependencies:
   google-auth-library:
     specifier: ^9.9.0
     version: 9.10.0
+  gsap:
+    specifier: ^3.12.5
+    version: 3.12.5
   langchain:
     specifier: ^0.0.162
     version: 0.0.162(@google-ai/generativelanguage@1.1.0)(google-auth-library@9.10.0)(mysql2@3.9.7)
@@ -2683,6 +2686,10 @@ packages:
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
+
+  /gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
+    dev: false
 
   /gtoken@7.1.0:
     resolution: {integrity: sha512-pCcEwRi+TKpMlxAQObHDQ56KawURgyAf6jtIY046fJ5tIv3zDe/LEIubckAO8fj6JnAxLdmWkUfNyulQ2iKdEw==}

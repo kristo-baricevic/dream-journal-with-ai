@@ -4,7 +4,7 @@ import {
 } from '@clerk/nextjs/server';
 
 const isPublic = createRouteMatcher([
-  '/(.*)', '/new-user(.*)', '/sign-in(.*)', 
+  '/', '/new-user(.*)', '/sign-in(.*)', 
 ]);
 
 export default clerkMiddleware((auth, req) => {
@@ -15,7 +15,7 @@ export default clerkMiddleware((auth, req) => {
     console.log('Request is protected. Authenticating...');
     auth().protect();
   }
-});
+}, { debug: true});
 
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
