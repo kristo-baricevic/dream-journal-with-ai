@@ -12,6 +12,9 @@ export default function Home() {
   // console.log("Test", userId);
 
   // let href = userId ? "/journal" : "/new-user";
+
+  let href = "/new-user";
+
   useEffect(() => {
     console.log("shooting star useEffect");
     createShootingStar();
@@ -34,11 +37,11 @@ export default function Home() {
             <h1 className="flex flex-col text-6xl text-black mb-4">Dream Journal</h1>
             <p className="flex flex-col text-xl text-black mb-4">Explore your dreams!</p>
             <div className="flex flex-col">
-              {/* <Link href={href}> */}
+              <Link href={href}>
                 <button className="bg-pink-400 shadow-lg text-black px-4 py-2 rounded-2xl text-xl border-solid border-2 border-black transition duration-300 ease-in-out hover:bg-pink-500 hover:text-white">
                   get started
                 </button>
-              {/* </Link> */}
+              </Link>
             </div>
           </div>
         </div>

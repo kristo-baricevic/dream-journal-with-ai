@@ -8,10 +8,10 @@ export function createShootingStar() {
     const shootingStar = document.createElement('div');
     shootingStar.id = 'shooting-star';
     shootingStar.style.position = 'absolute';
-    shootingStar.style.width = '45px';
-    shootingStar.style.height = '45px';
+    shootingStar.style.width = '15px';
+    shootingStar.style.height = '15px';
     shootingStar.style.borderRadius = '100%';
-    shootingStar.style.backgroundColor = 'white';
+    shootingStar.style.backgroundColor = '#ece75f';
     document.body.appendChild(shootingStar);
 
     // Set initial position of the shooting star
@@ -20,12 +20,13 @@ export function createShootingStar() {
     // Animate the shooting star
     gsap.to(shootingStar, {
         x: window.innerWidth + 20,
-        y: -200,
-        rotation: 160,
-        duration: 2,
-        ease: 'power3.inOut',
+        y: -700,
+        rotation: 260,
+        duration: 1,
+        delay: 4,
+        curviness: 1.5,
+        ease: 'none',
         onComplete: () => {
-            // Remove shooting star element from DOM after animation completes
             shootingStar.remove();
         }
     });
