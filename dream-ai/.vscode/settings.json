@@ -1,6 +1,13 @@
 {
     "cSpell.words": [
+        "hexidecimal",
+        "langchain",
+        "llms",
         "nextjs",
-        "trpc"
+        "openai",
+        "paramters",
+        "trpc",
+        "unoptimized",
+        "vectorstores"
     ]
 }

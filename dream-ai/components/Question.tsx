@@ -1,9 +1,10 @@
 "use client";
 
-import { askQuestion } from "@/utils/clientApi";
+import { askQuestion } from "@/utils/api/clientApi";
 import { SetStateAction, useState } from "react";
 import PersonalitySelection from "./PersonalityDropdown";
-import { getPersonality } from "@/utils/personalities";
+import { getPersonality } from "@/utils/paramters/personalities";
+import Image from "next/image";
 
 const Question = () => {
     const [value, setValue] = useState("Ask the dream doctor a question!");
@@ -104,7 +105,13 @@ const Question = () => {
             <div className="py-2">
                 {loading && (
                     <div className="spinner-overlay">
-                        <img src="/spinner.gif" alt="Loading..." />
+                        <Image
+                            src="/spinner.gif" 
+                            alt="Loading..." 
+                            height="100"
+                            width="100"
+                            unoptimized={true}
+                        />
                         <p> ...The doctor is thinking. This may take a moment!</p>
                     </div>
                 )}

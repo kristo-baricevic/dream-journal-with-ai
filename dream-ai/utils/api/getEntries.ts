@@ -1,5 +1,5 @@
-import { getUserByClerkID } from "./auth";
-import { prisma } from "./db";
+import { getUserByClerkID } from "../auth";
+import { prisma } from "../prismaQuery";
 
 export const getEntries = async () => {
     const user = await getUserByClerkID();

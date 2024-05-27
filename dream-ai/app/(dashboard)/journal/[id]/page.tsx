@@ -1,7 +1,6 @@
 import Editor from "@/components/Editor";
 import { getUserByClerkID } from "@/utils/auth";
-import { prisma } from "@/utils/db";
-import { JournalEntry } from "@prisma/client";
+import { prisma } from "@/utils/prismaQuery";
 
 const getEntry = async (id: any) => {
     const user = await getUserByClerkID();

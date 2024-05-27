@@ -1,6 +1,6 @@
-import { qa } from "@/utils/question";
+import { qa } from "@/utils/api/dreamApi";
 import { getUserByClerkID } from "@/utils/auth";
-import { prisma } from "@/utils/db";
+import { prisma } from "@/utils/prismaQuery";
 import { JournalEntry } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 

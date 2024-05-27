@@ -5,7 +5,7 @@ import { ResponsiveContainer, Line, XAxis, Tooltip, LineChart, TooltipProps } fr
 
 type AnalysisData = {
   sentimentScore: number;
-  createdAt: Date; // Keep as Date object
+  createdAt: Date; 
   mood: string;
   color: string;
 };

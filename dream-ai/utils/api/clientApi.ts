@@ -1,21 +1,34 @@
+import { EmotionType } from "../paramters/emotions";
 
 const createURL = (path: string) => {
     return window.location.origin + path;
 }
 
-export const updatedEntry = async (id: string, content: string) => {
-    const res = await fetch(
-        new Request(createURL(`/api/journal/${id}`), {
+export const updatedEntry = async (id: string, content: string, personality: string, mood: EmotionType) => {
+    try {
+        const response = await fetch(createURL(`/api/journal/${id}`), {
             method: 'PATCH',
-            body: JSON.stringify({ content }),
-        })
-    );
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content, personality, mood }),
+        });
 
-    if (res.ok) {
-        const data = await res.json();
-        return data.data;
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Entry updated successfully:', data);
+            return data;
+        } else {
+            const errorData = await response.json();
+            console.error('Failed to update entry:', errorData);
+            throw new Error('Failed to update entry');
+        }
+    } catch (error) {
+        console.error('Error updating entry:', error);
+        throw error;
     }
 };
+
 
 export const createNewEntry = async () => {
     const res = await fetch(
@@ -27,6 +40,9 @@ export const createNewEntry = async () => {
     if (res.ok) {
         const data = await res.json();
         return data.data;
+    } else {
+        const errorData = await res.json();
+        throw new Error(errorData.error || 'Failed to create entry');
     }
 };
 

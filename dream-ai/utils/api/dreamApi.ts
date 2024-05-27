@@ -1,9 +1,57 @@
 import { OpenAI } from 'langchain/llms/openai';
+import { loadQARefineChain } from 'langchain/chains';
+import { MemoryVectorStore } from 'langchain/vectorstores/memory';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import { Document } from 'langchain/document';
 import { PromptTemplate } from 'langchain/prompts';
 import { StructuredOutputParser } from 'langchain/output_parsers';
 import { z } from 'zod';
-import { getEmotionColor, emotions, EmotionType } from './emotions';
-import { getPersonality } from './personalities';
+import { getEmotionColor, emotions, EmotionType } from '../paramters/emotions';
+import { getPersonality } from '../paramters/personalities';
+
+//1//////////////////////////////////
+//This is the function use to generate the cumulative analysis on /journal/page.tsx 
+//It is triggered with the "Get your analysis!" button
+export const qa = async (question: string, entries: { id: string, createdAt: Date, content: string }[]) => {
+  try {
+    const docs = entries.map(
+      (entry) =>
+        new Document({
+          pageContent: entry.content,
+          metadata: { source: entry.id, date: entry.createdAt },
+        })
+    );
+
+    const model = new OpenAI({ temperature: 0.8, modelName: 'gpt-3.5-turbo' });
+    const chain = loadQARefineChain(model);
+    const embeddings = new OpenAIEmbeddings();
+    const store = await MemoryVectorStore.fromDocuments(docs, embeddings);
+    const relevantDocs = await store.similaritySearch(question);
+    const res = await chain.call({
+      input_documents: relevantDocs,
+      question,
+    });
+
+    return res.output_text;
+  } catch (error) {
+    console.error('Error in QA process:', error);
+    throw new Error('Failed to process QA request');
+  }
+};
+
+//2////////////////////////////////
+//This is the function used to generate a sample dream in /Components/Editor.tsx
+
+export const aiGenerate = async (question: string) => {
+  const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' });
+  const res = await model.call(question);  
+  return res;
+};
+
+//3////////////////////////////////
+// This is the parser and functions for prompting the OpenAI Api for a multi-part analysis
+// This function populates the data in the dream entries and creates the analysis results
+// on the Editor component
 
 // Define the schema for the structured output
 const parser = StructuredOutputParser.fromZodSchema(

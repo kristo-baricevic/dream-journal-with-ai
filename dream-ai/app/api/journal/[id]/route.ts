@@ -1,9 +1,12 @@
-import { analyze } from "@/utils/analyze";
+import { analyze } from "@/utils/api/dreamApi";
 import { getUserByClerkID } from "@/utils/auth";
-import { prisma } from "@/utils/db";
+import { prisma } from "@/utils/prismaQuery";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { EmotionType, emotions, getEmotionColor } from "@/utils/emotions";
+import { getEmotionColor, emotions, EmotionType } from "@/utils/paramters/emotions";
+
+export const maxDuration = 120;
+export const dynamic = 'force-dynamic';
 
 const requestSchema = z.object({
   content: z.string().min(1, 'Content is required'),
@@ -14,13 +17,16 @@ const requestSchema = z.object({
 export const PATCH = async (request: NextRequest, { params }: any) => {
   try {
     const body = await request.json();
+    console.log('Request Body:', body);
     const validationResult = requestSchema.safeParse(body);
     if (!validationResult.success) {
+      console.error('Validation Errors:', validationResult.error.errors);
       return NextResponse.json({ error: validationResult.error.errors }, { status: 400 });
     }
 
-    const { content, personality = "academic", mood } = validationResult.data; // Provide default value for personality
+    const { content, personality = "academic", mood } = validationResult.data;
     const user = await getUserByClerkID();
+    console.log('User:', user);
 
     const updatedEntry = await prisma.journalEntry.update({
       where: {
@@ -33,14 +39,10 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
         content,
       },
     });
+    console.log('Updated Entry:', updatedEntry);
 
-    // Fetch all entries for holistic analysis
-    const allEntries = await prisma.journalEntry.findMany({
-      where: { userId: user.id },
-      select: { content: true },
-    });
-
-    const analysis = await analyze(allEntries, personality);
+    const analysis = await analyze([updatedEntry], personality);
+    console.log('Analysis Result:', analysis);
 
     const updated = await prisma.analysis.upsert({
       where: {
@@ -67,6 +69,7 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
         subject: analysis.subject,
       },
     });
+    console.log('Updated Analysis:', updated);
 
     return NextResponse.json({ data: { ...updatedEntry, analysis: updated } });
   } catch (error) {
@@ -75,20 +78,30 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
   }
 };
 
-export const DELETE = async (request: NextRequest, { params }: any) => {
+export const DELETE = async (request: NextRequest, { params }: { params: { id: string } }) => {
   try {
     const user = await getUserByClerkID();
+    const entryId = params.id;
 
-    const deletedEntry = await prisma.journalEntry.delete({
+    const entry = await prisma.journalEntry.findFirst({
       where: {
-        userId_id: {
-          userId: user.id,
-          id: params.id,
-        },
+        id: entryId,
+        userId: user.id,
       },
     });
 
-    return NextResponse.json({ message: 'Entry deleted successfully' }, { status: 200 });
+    if (!entry) {
+      return NextResponse.json({ error: 'Entry not found or not authorized' }, { status: 404 });
+    }
+
+    // Delete the entry
+    await prisma.journalEntry.delete({
+      where: {
+        id: entryId,
+      },
+    });
+
+    return NextResponse.json({ message: 'Entry deleted successfully' });
   } catch (error) {
     console.error('Error deleting entry:', error);
     return NextResponse.json({ error: 'Failed to delete entry' }, { status: 500 });

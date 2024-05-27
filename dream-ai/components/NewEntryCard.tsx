@@ -1,7 +1,6 @@
 
 const NewEntryCard = () => {
 
-
     return (
         <div className="flex align-middle justify-center">
             <div className="flex align-middle justify-center cloud cursor-pointer bg-white text-center">

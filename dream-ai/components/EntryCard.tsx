@@ -20,6 +20,7 @@ type JournalEntry = PrismaJournalEntry & {
 const EntryCard = ({entry, href, onDelete}: EntryCardProps ) => {
     const handleDelete = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
+        console.log('Delete button clicked for entry ID:', entry.id);
         onDelete(entry.id);
     };
 

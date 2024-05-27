@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
-import ShootingStar from "@/components/ShootingStar";
 import { useEffect } from "react";
 import { createShootingStar } from "@/utils/createShootingStar";
 
