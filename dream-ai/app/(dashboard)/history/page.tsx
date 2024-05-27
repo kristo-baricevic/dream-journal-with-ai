@@ -3,7 +3,7 @@ import RadarChart from "@/components/RadarChart";
 import PieChart from "@/components/PieChart";
 import { getData } from "@/utils/getData";
 
-export const dynamic = 'force-dynamic'; // Ensures fresh data on each request
+export const dynamic = 'force-dynamic'; 
 
 const History = async () => {
 

@@ -1,64 +1,56 @@
 import { analyze } from "@/utils/analyze";
-// import { deleteEntry } from "@/utils/clientApi";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
 export const maxDuration = 120;
 export const dynamic = 'force-dynamic';
 
+const requestSchema = z.object({
+  content: z.string().nonempty('Content is required'),
+});
 
-export const PATCH = async ( request: Request, { params }: any) => {
-    const { content } = await request.json();
+export const PATCH = async (request: NextRequest, { params }: any) => {
+  try {
+    const body = await request.json();
+    const validationResult = requestSchema.safeParse(body);
+    if (!validationResult.success) {
+      return NextResponse.json({ error: validationResult.error.errors }, { status: 400 });
+    }
+
+    const { content } = validationResult.data;
     const user = await getUserByClerkID();
 
     const updatedEntry = await prisma.journalEntry.update({
-        where: {
-            userId_id: {
-                userId: user.id,
-                id: params.id,
-            },
+      where: {
+        userId_id: {
+          userId: user.id,
+          id: params.id,
         },
-        data: {
-            content,
-        },
-    })
-
-    const analysis = (await analyze(updatedEntry.content));
-
-
-    const updated = await prisma.analysis.upsert({
-        where: {
-            entryId: updatedEntry.id,
-        },
-        create: {
-            userId: user.id,
-            entryId: updatedEntry.id,
-            ...analysis,
-        },
-        update: analysis,
-    })
-
-    return NextResponse.json({ data: {...updatedEntry, analysis: updated} });
-}
-
-// Import other necessary modules and functions...
-
-export const DELETE = async (request: Request, { params }: any) => {
-    const user = await getUserByClerkID();  
-    console.log("testing delete");
-    console.log(params);
-
-    const deleteEntry = await prisma.journalEntry.delete({
-        where: {
-            id: params.id,
-        },
+      },
+      data: {
+        content,
+      },
     });
 
-    if (!deleteEntry) {
-        console.log("entry not deleted");
-    };
+    const analysis = await analyze(updatedEntry.content);
 
-    return NextResponse.json({ message: 'Entry deleted successfully' });
+    const updated = await prisma.analysis.upsert({
+      where: {
+        entryId: updatedEntry.id,
+      },
+      create: {
+        userId: user.id,
+        entryId: updatedEntry.id,
+        ...analysis,
+      },
+      update: analysis,
+    });
 
+    return NextResponse.json({ data: { ...updatedEntry, analysis: updated } });
+  } catch (error) {
+    console.error("Error analyzing entry:", error);
+    return NextResponse.json({ error: 'Failed to analyze entry' }, { status: 500 });
+  }
 };

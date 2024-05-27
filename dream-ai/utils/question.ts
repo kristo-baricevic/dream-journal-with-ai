@@ -4,8 +4,8 @@ import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { Document } from 'langchain/document';
 
-
-export const qa = async (question: string, entries: {id: string, createdAt: Date, content: string}[]) => {
+export const qa = async (question: string, entries: { id: string, createdAt: Date, content: string }[]) => {
+  try {
     const docs = entries.map(
       (entry) =>
         new Document({
@@ -24,8 +24,9 @@ export const qa = async (question: string, entries: {id: string, createdAt: Date
       question,
     });
 
-    console.log("after the generation.");
-    console.log(res);
-  
     return res.output_text;
-  };
+  } catch (error) {
+    console.error('Error in QA process:', error);
+    throw new Error('Failed to process QA request');
+  }
+};

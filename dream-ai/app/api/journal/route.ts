@@ -1,4 +1,3 @@
-import { analyze } from "@/utils/ai";
 import { getUserByClerkID } from "@/utils/auth"
 import { prisma } from "@/utils/db";
 import { revalidatePath } from "next/cache";
@@ -16,17 +15,6 @@ export const POST = async () => {
             content: 'Write about your dream!'
         },
     })
-
-
-    // maybe this is the part that needs to be changed?? 
-    // const analysis = await analyze(entry.content);
-    // await prisma.analysis.create({
-    //     data: {
-    //         userId: user.id,
-    //         entryId: entry.id,
-    //         ...analysis,
-    //     },
-    // })
 
     revalidatePath("/journal");
 
