@@ -6,7 +6,7 @@ import { z } from "zod";
 import { EmotionType, emotions, getEmotionColor } from "@/utils/emotions";
 
 const requestSchema = z.object({
-  content: z.string().nonempty('Content is required'),
+  content: z.string().min(1, 'Content is required'),
   personality: z.string().optional(),
   mood: z.enum(Object.keys(emotions) as [EmotionType, ...EmotionType[]]),
 });

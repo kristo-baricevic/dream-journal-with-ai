@@ -3,8 +3,11 @@
 import { updatedEntry, generateDream } from "@/utils/clientApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
 // import { useAutosave } from "react-autosave";
 import { deleteEntry } from "@/utils/clientApi";
+import PersonalitySelection from "./PersonalityDropdown";
+import { getPersonality } from "@/utils/personalities";
 
 type MoodObject = {
     [key: number]: string;
@@ -308,6 +311,7 @@ const Editor = ({ entry }: any) => {
                     <div className="py-4">
                         <form>
                             <div className="flex flex-row justify-center items-center">
+                            <PersonalitySelection onSelect={getPersonality} />
                             <div className="py-2 px-2">
                                 <button 
                                     onClick={handleSubmit}
@@ -333,9 +337,11 @@ const Editor = ({ entry }: any) => {
                     </div>
                     {isLoading && (
                         <div className="spinner-overlay">
-                            <img
+                            <Image
                                 src="/spinner.gif"
                                 alt="Loading..."
+                                height="100"
+                                width="100"
                             />
                         </div>
                     )}
