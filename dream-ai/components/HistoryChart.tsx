@@ -5,23 +5,25 @@ import { ResponsiveContainer, Line, XAxis, Tooltip, LineChart, TooltipProps } fr
 type AnalysisData = {
     sentimentScore: number;
     createdAt: string; 
-  };
-  
-const CustomTooltip: React.FC<TooltipProps<AnalysisData, "createdAt">> = ({
+    mood: string;
+    color: string;
+};
+
+const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
   payload,
   label,
   active,
 }) => {
   if (active && payload && payload.length) {
-    const data = payload[0].payload;
+    const data = payload[0].payload as AnalysisData;
     const formattedDate = new Date(label).toLocaleString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-      });
+      weekday: 'long',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    });
 
     return (
       <div className="p-8 custom-tooltip bg-white/5 shadow-md border border-black/10 rounded-lg backdrop-blur-md relative">

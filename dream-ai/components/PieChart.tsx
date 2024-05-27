@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { PieChart, Pie } from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 
 type AnalysisData = {
     color: string;
@@ -11,19 +11,16 @@ type AnalysisData = {
 
 const PieChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
     const uniqueColors: string[] = Array.from(new Set(data.map((item: AnalysisData) => item.color)));
-    console.log("unique colors are", uniqueColors);
 
     const colorData = uniqueColors.map((color) => {
-        console.log("color", color);
         let count = 0;
-        for (let i=0; i < data.length - 1; i++)
-             if (data[i].color === color) {
-            count++;
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].color === color) {
+                count++;
+            }
         }
-        return { name: color, value: count }; 
+        return { name: color, value: count, fill: color }; 
     });
-
-    console.log("colorData", colorData);
 
     return (
         <>
@@ -37,8 +34,11 @@ const PieChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
                         cx="50%"
                         cy="50%"
                         outerRadius={100}
-                        fill="#8884d8"
-                    />
+                    >
+                        {colorData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.fill} />
+                        ))}
+                    </Pie>
                 </PieChart>
             </div>
         </>
