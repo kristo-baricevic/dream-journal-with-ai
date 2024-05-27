@@ -1,12 +1,13 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
 import { ResponsiveContainer, Line, XAxis, Tooltip, LineChart, TooltipProps } from 'recharts';
 
 type AnalysisData = {
-    sentimentScore: number;
-    createdAt: string; 
-    mood: string;
-    color: string;
+  sentimentScore: number;
+  createdAt: string; 
+  mood: string;
+  color: string;
 };
 
 const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
@@ -15,7 +16,7 @@ const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
   active,
 }) => {
   if (active && payload && payload.length) {
-    const data = payload[0].payload as AnalysisData;
+    const data = payload[0].payload as AnalysisData; // Cast payload to AnalysisData
     const formattedDate = new Date(label).toLocaleString('en-us', {
       weekday: 'long',
       year: 'numeric',
@@ -40,9 +41,26 @@ const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
 };
 
 const HistoryChart: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
+  const [formattedData, setFormattedData] = useState<AnalysisData[]>([]);
+
+  useEffect(() => {
+    const processData = data.map((item) => ({
+      ...item,
+      createdAt: new Date(item.createdAt).toLocaleString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      }),
+    }));
+    setFormattedData(processData);
+  }, [data]);
+
   return (
     <ResponsiveContainer width={"100%"} height={400}>
-      <LineChart width={300} height={100} data={data}>
+      <LineChart width={300} height={100} data={formattedData}>
         <Line
           dataKey="sentimentScore"
           type="monotone"
