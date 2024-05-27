@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const requestSchema = z.object({
-  question: z.string().nonempty('Question is required'),
+  question: z.string().min(1, 'Question is required'),
 });
 
 export const POST = async (request: NextRequest) => {

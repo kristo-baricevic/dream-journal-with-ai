@@ -1,44 +1,54 @@
 import { OpenAI } from 'langchain/llms/openai';
 import { PromptTemplate } from 'langchain/prompts';
-import {
-  StructuredOutputParser,
-  OutputFixingParser,
-} from 'langchain/output_parsers';
+import { StructuredOutputParser } from 'langchain/output_parsers';
 import { z } from 'zod';
+import { getEmotionColor, emotions, EmotionType } from './emotions';
+import { getPersonality } from './personalities';
 
 // Define the schema for the structured output
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
-    mood: z.string().describe('the mood of the person who wrote the journal entry. Make sure the first letter is capitalized.'),
+    mood: z.enum(Object.keys(emotions) as [EmotionType, ...EmotionType[]]).describe('the mood of the person who wrote the journal entry.'),
     summary: z.string().describe('quick summary of the entire entry.'),
     negative: z.boolean().describe('is the journal entry negative? (i.e. does it contain negative emotions?).'),
     subject: z.string().describe('a whimsical title for the dream.'),
-    color: z.string().describe('a hexidecimal color code that represents the mood of the entry. For example, #0E86D4 for inspired, #F8CF2C for happy, #F9521E for angry. Avoid white, gray, and black.'),
-    interpretation: z.string().describe('your final analysis of the dream in about 5 or 6 sentences. Make this a dramatic interpretation. When you are done, suggest as a sacrifice to the Eternal Beings of the Dream World: a vegetable to eat, a potion to drink, or a line to recite as an offering.'),
+    color: z.enum(Object.values(emotions) as [string, ...string[]]).describe('a hexidecimal color code that represents the mood of the entry.'),
+    interpretation: z.string().describe('your final analysis of the dream in about 5 or 6 sentences. Make this a dramatic interpretation. When you are done, suggest a song to listen to and a snack to eat.'),
     sentimentScore: z.number().describe('sentiment of the text and rated on a scale from -10 to 10, where -10 is extremely negative, 0 is neutral, and 10 is extremely positive.'),
   })
 );
 
-const getPrompt = async (content: string) => {
+const getPrompt = async (entries: string, personality: string) => {
   const format_instructions = parser.getFormatInstructions();
   const prompt = new PromptTemplate({
-    template: 'You are doctor of dream analysis. You have a PhD in Psychology with a Masters in Dream Analysis from the University of Dreams. You have magical powers to interpret dreams. Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! When you are done, suggest a song to listen to and a snack to eat.\n{format_instructions}\n{entry}',
-    inputVariables: ['entry'],
+    template: `
+      {personality}
+      Analyze the following journal entries holistically. Follow the instructions and format your response to match the format instructions.
+      {format_instructions}
+
+      Journal Entries:
+      {entries}
+    `,
+    inputVariables: ['entries', 'personality'],
     partialVariables: { format_instructions },
   });
 
-  return prompt.format({ entry: content });
+  return prompt.format({ entries, personality });
 };
 
-export const analyze = async (content: string) => {
-  const input = await getPrompt(content);
+export const analyze = async (entries: { content: string }[], personalityType: string) => {
+  const combinedEntries = entries.map(entry => entry.content).join('\n\n');
+  const personality = getPersonality(personalityType);
+  const input = await getPrompt(combinedEntries, personality);
   const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' });
   const result = await model.call(input);
 
   try {
-    return parser.parse(result);
+    const parsedResult = parser.parse(result);
+    (await parsedResult).color = getEmotionColor((await parsedResult).mood as EmotionType);
+    return parsedResult;
   } catch (e) {
     console.error('Failed to parse analysis result', e);
-    throw new Error('Failed to analyze dream journal entry');
+    throw new Error('Failed to analyze dream journal entries');
   }
 };

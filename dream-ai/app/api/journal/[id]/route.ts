@@ -3,12 +3,12 @@ import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-
-export const maxDuration = 120;
-export const dynamic = 'force-dynamic';
+import { EmotionType, emotions, getEmotionColor } from "@/utils/emotions";
 
 const requestSchema = z.object({
   content: z.string().nonempty('Content is required'),
+  personality: z.string().optional(),
+  mood: z.enum(Object.keys(emotions) as [EmotionType, ...EmotionType[]]),
 });
 
 export const PATCH = async (request: NextRequest, { params }: any) => {
@@ -19,7 +19,7 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
       return NextResponse.json({ error: validationResult.error.errors }, { status: 400 });
     }
 
-    const { content } = validationResult.data;
+    const { content, personality = "academic", mood } = validationResult.data; // Provide default value for personality
     const user = await getUserByClerkID();
 
     const updatedEntry = await prisma.journalEntry.update({
@@ -34,7 +34,13 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
       },
     });
 
-    const analysis = await analyze(updatedEntry.content);
+    // Fetch all entries for holistic analysis
+    const allEntries = await prisma.journalEntry.findMany({
+      where: { userId: user.id },
+      select: { content: true },
+    });
+
+    const analysis = await analyze(allEntries, personality);
 
     const updated = await prisma.analysis.upsert({
       where: {
@@ -43,9 +49,23 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
       create: {
         userId: user.id,
         entryId: updatedEntry.id,
-        ...analysis,
+        mood,
+        color: getEmotionColor(mood),
+        summary: analysis.summary,
+        interpretation: analysis.interpretation,
+        sentimentScore: analysis.sentimentScore,
+        negative: analysis.negative,
+        subject: analysis.subject,
       },
-      update: analysis,
+      update: {
+        mood,
+        color: getEmotionColor(mood),
+        summary: analysis.summary,
+        interpretation: analysis.interpretation,
+        sentimentScore: analysis.sentimentScore,
+        negative: analysis.negative,
+        subject: analysis.subject,
+      },
     });
 
     return NextResponse.json({ data: { ...updatedEntry, analysis: updated } });

@@ -2,6 +2,8 @@
 
 import { askQuestion } from "@/utils/clientApi";
 import { SetStateAction, useState } from "react";
+import PersonalitySelection from "./PersonalityDropdown";
+import { getPersonality } from "@/utils/personalities";
 
 const Question = () => {
     const [value, setValue] = useState("You are an eccentric professor. " +
@@ -59,6 +61,9 @@ const Question = () => {
 
     return (
         <div className="flex flex-col py-4 justify-center align-middle">
+            <div className="flex justify-center mb-4">
+                <PersonalitySelection onSelect={getPersonality} />
+            </div>
             <div className="flex flex-wrap justify-center align-middle">
                 <div className="flex flex-wrap px-2 py-2">
                     <form onSubmit={handleSubmit}>

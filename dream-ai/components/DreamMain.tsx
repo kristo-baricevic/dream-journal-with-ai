@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { JournalEntry } from "@prisma/client";
+import PersonalitySelection from "@/components/PersonalityDropdown";
 
 type DreamMainProps = {
     initialEntries: JournalEntry[];
@@ -18,11 +19,10 @@ const DreamMain: React.FC<DreamMainProps> = ({ initialEntries = [] }) => {
     const router = useRouter();
     const [entries, setEntries] = useState<JournalEntry[]>(initialEntries);
     const [isLoading, setIsLoading] = useState(false);
+    const [selectedPersonality, setSelectedPersonality] = useState<string>('academic');
 
     useEffect(() => {
-        // console.log('Client-side initialEntries:', initialEntries);
         setEntries(initialEntries);
-
     }, [initialEntries]);
 
     const handleOnClick = async () => {
