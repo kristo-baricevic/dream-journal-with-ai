@@ -5,7 +5,7 @@ import { ResponsiveContainer, Line, XAxis, Tooltip, LineChart, TooltipProps } fr
 
 type AnalysisData = {
   sentimentScore: number;
-  createdAt: string; 
+  createdAt: Date; // Keep this as Date
   mood: string;
   color: string;
 };
@@ -41,22 +41,10 @@ const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
 };
 
 const HistoryChart: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
-  const [formattedData, setFormattedData] = useState<AnalysisData[]>([]);
-
-  useEffect(() => {
-    const processData = data.map((item) => ({
-      ...item,
-      createdAt: new Date(item.createdAt).toLocaleString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-      }),
-    }));
-    setFormattedData(processData);
-  }, [data]);
+  const formattedData = data.map(item => ({
+    ...item,
+    createdAt: item.createdAt.toISOString() // Format date as ISO string
+  }));
 
   return (
     <ResponsiveContainer width={"100%"} height={400}>
