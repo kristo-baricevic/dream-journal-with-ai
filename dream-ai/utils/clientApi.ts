@@ -31,18 +31,27 @@ export const createNewEntry = async () => {
 };
 
 export const deleteEntry = async (id: string) => {
-    const res = await fetch(
-        new Request(createURL(`/api/journal/${id}`), {
-            method: 'DELETE',
-        })
-    );
+    try {
+        const url = createURL(`/api/journal/${id}`);
+        const res = await fetch(
+            new Request(url, {
+                method: 'DELETE',
+            })
+        );
 
-    if (res.ok) {
-        return 'Entry deleted successfully';
-    } else {
-        throw new Error('Failed to delete entry');
+        if (res.ok) {
+            return 'Entry deleted successfully';
+        } else {
+            const errorText = await res.text();
+            console.error(`Failed to delete entry. Status: ${res.status}, Message: ${errorText}`);
+            throw new Error(`Failed to delete entry. Status: ${res.status}, Message: ${errorText}`);
+        }
+    } catch (error) {
+        console.error('Error deleting entry:', error);
+        throw error;
     }
 };
+
 
 export const askQuestion = async (question: string) => {
     const res = await fetch(

@@ -74,3 +74,23 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
     return NextResponse.json({ error: 'Failed to analyze entry' }, { status: 500 });
   }
 };
+
+export const DELETE = async (request: NextRequest, { params }: any) => {
+  try {
+    const user = await getUserByClerkID();
+
+    const deletedEntry = await prisma.journalEntry.delete({
+      where: {
+        userId_id: {
+          userId: user.id,
+          id: params.id,
+        },
+      },
+    });
+
+    return NextResponse.json({ message: 'Entry deleted successfully' }, { status: 200 });
+  } catch (error) {
+    console.error('Error deleting entry:', error);
+    return NextResponse.json({ error: 'Failed to delete entry' }, { status: 500 });
+  }
+};
