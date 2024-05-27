@@ -2,7 +2,12 @@
 
 import React from 'react';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from 'recharts';
-import { AnalysisData } from '@/types';
+
+type AnalysisData = {
+  mood: string;
+  sentimentScore: number;
+  createdAt: Date;
+};
 
 const RadarChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
   const uniqueMoods: string[] = Array.from(new Set(data.map((item: AnalysisData) => item.mood)));

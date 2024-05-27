@@ -14,8 +14,8 @@ export type JournalEntry = {
 
 export type AnalysisData = {
   id: string;
-  createdAt: string; // Change Date to string
-  updatedAt: string; // Change Date to string
+  createdAt: Date; 
+  updatedAt: Date;
   entryId: string;
   userId: string;
   mood: string;

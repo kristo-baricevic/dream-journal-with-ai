@@ -2,7 +2,12 @@
 
 import React from 'react';
 import { PieChart, Pie, Cell } from 'recharts';
-import { AnalysisData } from '@/types';
+
+type AnalysisData = {
+  color: string;
+  sentimentScore: number;
+  createdAt: Date;
+};
 
 const PieChartComponent: React.FC<{ data: AnalysisData[] }> = ({ data }) => {
   const uniqueColors: string[] = Array.from(new Set(data.map((item: AnalysisData) => item.color)));
