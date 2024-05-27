@@ -1,5 +1,5 @@
 import { analyze } from "@/utils/analyze";
-import { deleteEntry } from "@/utils/api";
+// import { deleteEntry } from "@/utils/clientApi";
 import { getUserByClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import { NextResponse } from "next/server";

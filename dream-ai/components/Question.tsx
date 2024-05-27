@@ -1,7 +1,7 @@
 "use client";
 
-import { askQuestion } from "@/utils/api";
-import { useState } from "react";
+import { askQuestion } from "@/utils/clientApi";
+import { SetStateAction, useState } from "react";
 
 const Question = () => {
     const [value, setValue] = useState("You are an eccentric professor. " +
@@ -27,11 +27,11 @@ const Question = () => {
     const [response, setResponse] = useState("");
     const [isQuestion, setIsQuestion] = useState(false);
 
-    const onChange = (e) => {
+    const onChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setValue(e.target.value);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setLoading(true);
         const answer = await askQuestion(value);
@@ -40,14 +40,14 @@ const Question = () => {
         setLoading(false);
     };
 
-    const handleAskQuestion = async (e) => {
+    const handleAskQuestion = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setLoading(true);
         setIsQuestion(!isQuestion);
         setLoading(false);
     };
 
-    const handleSubmitQuestion = async (e) => {
+    const handleSubmitQuestion = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setLoading(true);
         const answer = await askQuestion(value);

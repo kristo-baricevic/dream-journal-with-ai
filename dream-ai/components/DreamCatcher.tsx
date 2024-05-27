@@ -15,7 +15,20 @@ const DreamCatcher: React.FC<DreamCatcherProps> = ({ entries, onDeleteEntry }) =
       {entries.map((entry) => (
         <Link href={`/journal/${entry.id}`} key={entry.id}>
           <div>
-            <EntryCard entry={entry} onDelete={onDeleteEntry} href={`/journal/${entry.id}`} />
+            <EntryCard entry={entry} onDelete={onDeleteEntry} href={`/journal/${entry.id}`} analysis={{
+              id: '',
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              entryId: '',
+              userId: '',
+              mood: '',
+              summary: '',
+              color: '',
+              interpretation: '',
+              negative: false,
+              subject: '',
+              sentimentScore: 0
+            }} />
           </div>
         </Link>
       ))}

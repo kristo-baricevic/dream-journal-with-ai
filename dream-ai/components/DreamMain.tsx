@@ -3,9 +3,11 @@
 import NewEntryCard from "@/components/NewEntryCard";
 import Question from "@/components/Question";
 import DreamCatcher from "@/components/DreamCatcher";
-import { createNewEntry, getEntries, deleteEntry } from "@/utils/api";
+import { createNewEntry, deleteEntry } from "@/utils/clientApi";
+import { getEntries } from "@/utils/api";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { JournalEntry } from "@prisma/client";
 
 type DreamMainProps = {
@@ -18,7 +20,9 @@ const DreamMain: React.FC<DreamMainProps> = ({ initialEntries = [] }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        // console.log('Client-side initialEntries:', initialEntries);
         setEntries(initialEntries);
+
     }, [initialEntries]);
 
     const handleOnClick = async () => {
@@ -52,7 +56,12 @@ const DreamMain: React.FC<DreamMainProps> = ({ initialEntries = [] }) => {
                 <div>
                     {isLoading ? (
                         <div className="spinner-overlay">
-                            <img src="/spinner.gif" alt="Loading..." />
+                            <Image 
+                                src="/spinner.gif" 
+                                alt="Loading..." 
+                                height="100"
+                                width="100"
+                            />
                         </div>
                     ) : (
                         <NewEntryCard />

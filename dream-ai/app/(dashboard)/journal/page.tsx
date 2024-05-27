@@ -3,6 +3,7 @@ import { getEntries } from "@/utils/api";
 
 const JournalPage = async () => {
     const entries = await getEntries();
+    // console.log('Server-side entries:', entries);
 
     return (
         <div className="px-10">
