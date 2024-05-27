@@ -15,9 +15,7 @@ const requestSchema = z.object({
 });
 
 export const PATCH = async (request: NextRequest, { params }: any) => {
-  try {
     const body = await request.json();
-    console.log('Request Body:', body);
     const validationResult = requestSchema.safeParse(body);
     if (!validationResult.success) {
       console.error('Validation Errors:', validationResult.error.errors);
@@ -26,7 +24,6 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
 
     const { content, personality = "academic", mood } = validationResult.data;
     const user = await getUserByClerkID();
-    console.log('User:', user);
 
     const updatedEntry = await prisma.journalEntry.update({
       where: {
@@ -39,10 +36,8 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
         content,
       },
     });
-    console.log('Updated Entry:', updatedEntry);
 
     const analysis = await analyze([updatedEntry], personality);
-    console.log('Analysis Result:', analysis);
 
     const updated = await prisma.analysis.upsert({
       where: {
@@ -69,17 +64,11 @@ export const PATCH = async (request: NextRequest, { params }: any) => {
         subject: analysis.subject,
       },
     });
-    console.log('Updated Analysis:', updated);
 
     return NextResponse.json({ data: { ...updatedEntry, analysis: updated } });
-  } catch (error) {
-    console.error("Error analyzing entry:", error);
-    return NextResponse.json({ error: 'Failed to analyze entry' }, { status: 500 });
-  }
 };
 
 export const DELETE = async (request: NextRequest, { params }: { params: { id: string } }) => {
-  try {
     const user = await getUserByClerkID();
     const entryId = params.id;
 
@@ -102,8 +91,4 @@ export const DELETE = async (request: NextRequest, { params }: { params: { id: s
     });
 
     return NextResponse.json({ message: 'Entry deleted successfully' });
-  } catch (error) {
-    console.error('Error deleting entry:', error);
-    return NextResponse.json({ error: 'Failed to delete entry' }, { status: 500 });
-  }
 };

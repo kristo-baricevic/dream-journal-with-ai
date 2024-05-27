@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 
 export const POST = async () => {
-    try {
+    console.log("post new dream");
         const user = await getUserByClerkID();
         const entry = await prisma.journalEntry.create({
             data: {
@@ -17,10 +17,8 @@ export const POST = async () => {
             },
         })
         revalidatePath("/journal");
+        console.log("posted new dream", entry.id);
+
 
         return NextResponse.json({ data: entry });
-    } catch (error) {
-        console.error("Error creating entry:", error);
-        return NextResponse.json({ error: 'Failed to create entry' }, { status: 500 });
-    }
 }

@@ -39,6 +39,7 @@ export const createNewEntry = async () => {
 
     if (res.ok) {
         const data = await res.json();
+        console.log('New entry data:', data);
         return data.data;
     } else {
         const errorData = await res.json();
