@@ -1,5 +1,6 @@
-import { prisma } from '@/utils/db';
+// utils/getData.ts
 import { getUserByClerkID } from '@/utils/auth';
+import { prisma } from '@/utils/db';
 import { AnalysisData } from '@/types';
 
 export const getData = async (): Promise<{ analyses: AnalysisData[], avg: number }> => {
@@ -12,5 +13,8 @@ export const getData = async (): Promise<{ analyses: AnalysisData[], avg: number
   const sum = analyses.reduce((total, current) => total + current.sentimentScore, 0);
   const avg = Math.round(sum / analyses.length);
 
-  return { analyses, avg };
+  return {
+    analyses, 
+    avg,
+  };
 };

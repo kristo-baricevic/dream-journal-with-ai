@@ -3,8 +3,13 @@ import RadarChart from "@/components/RadarChart";
 import PieChart from "@/components/PieChart";
 import { getData } from "@/utils/getData";
 
+export const dynamic = 'force-dynamic'; // Ensures fresh data on each request
+
 const History = async () => {
-    const {avg, analyses} = await getData();
+
+    const { analyses, avg } = await getData();
+
+    
     return (
         <div className="w-full h-full bg-pink-100 px-4 py-4">
             <div className="flex flex-col">
