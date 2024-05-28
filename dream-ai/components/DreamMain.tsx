@@ -23,15 +23,17 @@ const DreamMain: React.FC<DreamMainProps> = ({ initialEntries = [] }) => {
     setEntries(initialEntries);
   }, [initialEntries]);
 
-    const handleOnClick = async () => {
-        setIsLoading(true);
-        try {
-            const data = await createNewEntry();
-            router.replace(`/journal/${data.id}`);
-        } finally {
-            setIsLoading(false)
-        }
+const handleOnClick = async () => {
+    setIsLoading(true);
+    try {
+        const data = await createNewEntry();
+        const updatedEntries = await getEntries();
+        setEntries(updatedEntries);
+        router.replace(`/journal/${data.id}`);
+    } finally {
+        setIsLoading(false)
     }
+}
 
   const handleDeleteEntry = async (id: string) => {
     setIsLoading(true);

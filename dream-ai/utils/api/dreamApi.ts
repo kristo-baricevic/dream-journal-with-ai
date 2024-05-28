@@ -84,10 +84,10 @@ const getPrompt = async (entries: string, personality: string) => {
   return prompt.format({ entries, personality });
 };
 
-export const analyze = async (entries: { content: string }[], personalityType: string) => {
-  const combinedEntries = entries.map(entry => entry.content).join('\n\n');
+export const analyze = async (content: string, personalityType: string) => {
+  // const combinedEntries = entries.map(entry => entry.content).join('\n\n');
   const personality = getPersonality(personalityType);
-  const input = await getPrompt(combinedEntries, personality);
+  const input = await getPrompt(content, personality);
   const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' });
   const result = await model.call(input);
 
