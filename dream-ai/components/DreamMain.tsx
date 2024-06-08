@@ -4,7 +4,7 @@ import NewEntryCard from '@/components/NewEntryCard';
 import Question from '@/components/Question';
 import DreamCatcher from '@/components/DreamCatcher';
 import { createNewEntry, deleteEntry } from '@/utils/api/clientApi';
-import { getEntries } from '@/utils/api/getEntries';
+import { getEntries } from '@/services/getEntries';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';

@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server"
-import { prisma } from "./prismaQuery"
+import { prisma } from "../services/prismaQuery"
 
 export const getUserByClerkID = async (select = {id: true}) => {
     console.log("auth running");

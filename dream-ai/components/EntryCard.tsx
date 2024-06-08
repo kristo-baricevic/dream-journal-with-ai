@@ -1,6 +1,6 @@
 'use client';
 
-import { lightenColor } from "@/services/colorUtilities";
+import { lightenColor } from "@/utils/colorUtilities";
 import { Analysis,  JournalEntry as PrismaJournalEntry, } from "@prisma/client";
 // import Link from "next/link";
 import Image from "next/image";

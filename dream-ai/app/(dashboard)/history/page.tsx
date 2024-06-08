@@ -1,7 +1,7 @@
 import HistoryChart from "@/components/HistoryChart";
 import RadarChart from "@/components/RadarChart";
 import PieChart from "@/components/PieChart";
-import { getData } from "@/utils/api/getData";
+import { getData } from "@/services/getData";
 
 export const dynamic = 'force-dynamic'; 
 

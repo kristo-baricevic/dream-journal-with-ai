@@ -1,4 +1,4 @@
-export function lightenColor(hexColor, percent) {
+export function lightenColor(hexColor: string | undefined, percent: number) {
 
     if(!hexColor){
         hexColor = '#ADD8E6';
@@ -22,13 +22,15 @@ export function lightenColor(hexColor, percent) {
     return rgbToHex(rgb);
 }
 
-function rgbToHsl(r, g, b) {
+function rgbToHsl(r: number, g: number, b: number) {
     r /= 255;
     g /= 255;
     b /= 255;
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
-    let h, s, l = (max + min) / 2;
+    let h: number = 0; // Initialize h to 0
+    let s: number;
+    let l = (max + min) / 2;
 
     if (max === min) {
         h = s = 0;
@@ -50,7 +52,7 @@ function rgbToHsl(r, g, b) {
     return [h, s, l];
 }
 
-function hslToRgb(h, s, l) {
+function hslToRgb(h: number, s: number, l: number) {
     h /= 360;
     s /= 100;
     l /= 100;
@@ -59,7 +61,7 @@ function hslToRgb(h, s, l) {
     if (s === 0) {
         r = g = b = l;
     } else {
-        const hue2rgb = (p, q, t) => {
+        const hue2rgb = (p: number, q: number, t: number) => {
             if (t < 0) t += 1;
             if (t > 1) t -= 1;
             if (t < 1 / 6) return p + (q - p) * 6 * t;
@@ -82,6 +84,6 @@ function hslToRgb(h, s, l) {
     return [r, g, b];
 }
 
-function rgbToHex(rgb) {
+function rgbToHex(rgb: { toString: (arg0: number) => any; }[]) {
     return `#${rgb[0].toString(16)}${rgb[1].toString(16)}${rgb[2].toString(16)}`;
 }

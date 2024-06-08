@@ -1,6 +1,6 @@
 import { analyze } from '@/utils/api/dreamApi';
 import { getUserByClerkID } from '@/utils/auth';
-import { prisma } from '@/utils/prismaQuery';
+import { prisma } from '@/services/prismaQuery';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getEmotionColor, emotions, EmotionType } from "@/utils/paramters/emotions"

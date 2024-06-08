@@ -1,6 +1,6 @@
 // utils/getData.ts
 import { getUserByClerkID } from '@/utils/auth';
-import { prisma } from '@/utils/prismaQuery';
+import { prisma } from '@/services/prismaQuery';
 import { AnalysisData } from '@/types';
 
 export const getData = async (): Promise<{ analyses: AnalysisData[], avg: number }> => {

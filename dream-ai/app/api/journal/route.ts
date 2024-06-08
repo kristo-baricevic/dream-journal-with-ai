@@ -1,6 +1,6 @@
 import { analyze } from "@/utils/api/dreamApi";
 import { getUserByClerkID } from "@/utils/auth"
-import { prisma } from "@/utils/prismaQuery";
+import { prisma } from "@/services/prismaQuery";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 

@@ -1,5 +1,5 @@
 import DreamMain from "@/components/DreamMain";
-import { getEntries } from "@/utils/api/getEntries";
+import { getEntries } from "@/services/getEntries";
 
 const JournalPage = async () => {
     const entries = await getEntries();
