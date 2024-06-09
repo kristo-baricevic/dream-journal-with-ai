@@ -1,9 +1,10 @@
 import { analyze } from '@/utils/api/dreamApi';
-import { getUserByClerkID } from '@/utils/auth';
+import { getUserByClerkID } from '@/app/api/auth/getUserByClerkID';
 import { prisma } from '@/services/prismaQuery';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getEmotionColor, emotions, EmotionType } from "@/utils/paramters/emotions"
+import { getEmotionColor, emotions, EmotionType } from "@/utils/parameters/emotions"
+import { createURL } from "@/utils/api/clientApi";
 
 export const maxDuration = 120;
 export const dynamic = 'force-dynamic';
@@ -91,4 +92,29 @@ export const DELETE = async (request: NextRequest, { params }: { params: { id: s
   });
 
   return NextResponse.json({ message: 'Entry deleted successfully' });
+};
+
+export const updatedEntry = async (id: string, content: string, personality: string, mood: EmotionType) => {
+  try {
+      const response = await fetch(createURL(`/api/journal/${id}`), {
+          method: 'PATCH',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ content, personality, mood }),
+      });
+
+      if (response.ok) {
+          const data = await response.json();
+          console.log('Entry updated successfully:', data);
+          return data;
+      } else {
+          const errorData = await response.json();
+          console.error('Failed to update entry:', errorData);
+          throw new Error('Failed to update entry');
+      }
+  } catch (error) {
+      console.error('Error updating entry:', error);
+      throw error;
+  }
 };

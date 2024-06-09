@@ -1,12 +1,12 @@
 import { auth } from "@clerk/nextjs/server"
-import { prisma } from "../services/prismaQuery"
+import { prisma } from "../../../services/prismaQuery"
 
 export const getUserByClerkID = async (select = {id: true}) => {
-    console.log("auth running");
+    console.log("getUserByClerkID running");
 
     const {userId} = await auth();
 
-    console.log("test auth", userId);
+    console.log("getUserByClerkID result is ", userId);
 
     if (!userId) {
         throw new Error("User is not authenticated");

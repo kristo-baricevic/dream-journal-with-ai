@@ -1,5 +1,5 @@
 import { aiGenerate } from "@/utils/api/dreamApi";
-import { getUserByClerkID } from "@/utils/auth";
+import { getUserByClerkID } from "@/app/api/auth/getUserByClerkID";
 import { prisma } from "@/services/prismaQuery";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";

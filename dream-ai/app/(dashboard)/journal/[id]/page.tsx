@@ -1,9 +1,6 @@
 import Editor from "@/components/Editor";
 import { getEntry } from "@/services/getEntry";
 
-
-
-
 const EntryPage = async ({ params }: any ) => { 
     const entry = await getEntry(params.id);
 

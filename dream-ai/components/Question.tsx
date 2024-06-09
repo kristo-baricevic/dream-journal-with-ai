@@ -3,7 +3,7 @@
 import { askQuestion } from "@/utils/api/clientApi";
 import { SetStateAction, useState } from "react";
 import PersonalitySelection from "./PersonalityDropdown";
-import { getPersonality } from "@/utils/paramters/personalities";
+import { getPersonality } from "@/utils/parameters/personalities";
 import Image from "next/image";
 
 const Question = () => {

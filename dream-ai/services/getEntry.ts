@@ -1,4 +1,4 @@
-import { getUserByClerkID } from "../utils/auth";
+import { getUserByClerkID } from "../app/api/auth/getUserByClerkID";
 import { prisma } from "../services/prismaQuery";
 
 export const getEntry = async (id: string) => {

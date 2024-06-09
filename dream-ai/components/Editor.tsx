@@ -7,8 +7,8 @@ import Image from "next/image";
 // import { useAutosave } from "react-autosave";
 import { deleteEntry } from "@/utils/api/clientApi";
 import PersonalitySelection from "./PersonalityDropdown";
-import { getPersonality } from "@/utils/paramters/personalities";
-import { EmotionType } from "@/utils/paramters/emotions";
+import { getPersonality } from "@/utils/parameters/personalities";
+import { EmotionType } from "@/utils/parameters/emotions";
 
 type MoodObject = {
     [key: number]: string;

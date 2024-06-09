@@ -6,8 +6,8 @@ import { Document } from 'langchain/document';
 import { PromptTemplate } from 'langchain/prompts';
 import { StructuredOutputParser } from 'langchain/output_parsers';
 import { z } from 'zod';
-import { getEmotionColor, emotions, EmotionType } from '../paramters/emotions';
-import { getPersonality } from '../paramters/personalities';
+import { getEmotionColor, emotions, EmotionType } from '../parameters/emotions';
+import { getPersonality } from '../parameters/personalities';
 
 //1//////////////////////////////////
 //This is the function use to generate the cumulative analysis on /journal/page.tsx 
@@ -52,7 +52,7 @@ export const aiGenerate = async (question: string) => {
 // This is the parser and functions for prompting the OpenAI Api for a multi-part analysis
 // This function populates the data in the dream entries and creates the analysis results
 // on the Editor component
-
+//
 // Define the schema for the structured output
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({

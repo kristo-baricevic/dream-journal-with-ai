@@ -1,6 +1,6 @@
-import { EmotionType } from "../paramters/emotions";
+import { EmotionType } from "../parameters/emotions";
 
-const createURL = (path: string) => {
+export const createURL = (path: string) => {
     return window.location.origin + path;
 }
 
@@ -46,6 +46,8 @@ export const createNewEntry = async () => {
         throw new Error(errorData.error || 'Failed to create entry');
     }
 };
+
+
 
 export const deleteEntry = async (id: string) => {
     try {
