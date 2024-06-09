@@ -1,15 +1,16 @@
 import { auth } from "@clerk/nextjs/server"
 import { prisma } from "../../../services/prismaQuery"
+import { redirect } from "next/navigation";
 
 export const getUserByClerkID = async (select = {id: true}) => {
-    console.log("getUserByClerkID running");
 
     const {userId} = await auth();
 
     console.log("getUserByClerkID result is ", userId);
 
     if (!userId) {
-        throw new Error("User is not authenticated");
+        // temporarily redirecting to because sign out is sending user to journal page
+        redirect("/");
     }
 
     const user = await prisma.user.findUniqueOrThrow ({
