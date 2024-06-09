@@ -4,7 +4,6 @@ import { updatedEntry, generateDream } from "@/utils/api/clientApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
-// import { useAutosave } from "react-autosave";
 import { deleteEntry } from "@/utils/api/clientApi";
 import PersonalitySelection from "./PersonalityDropdown";
 import { getPersonality } from "@/utils/parameters/personalities";
@@ -288,7 +287,6 @@ const Editor = ({ entry }: any) => {
 
     const handleDelete = async () => {
         try {
-            // Call delete with the entry ID to delete it
             const res = await deleteEntry(entry.id);
             console.log("delete response", res);
             router.push('/');

@@ -16,6 +16,6 @@ export const emotions = {
   export type EmotionType = keyof typeof emotions;
   
   export const getEmotionColor = (emotion: EmotionType): string => {
-    return emotions[emotion] || '#808080'; // Default to neutral gray if emotion is not found
+    return emotions[emotion] || '#808080';
   };
   
