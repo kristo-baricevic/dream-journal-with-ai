@@ -1,7 +1,3 @@
-I apologize for the confusion. Let's use the actual project structure from the repository. Here is the README with the correct structure:
-
----
-
 # Dream Journal with AI
 
 Welcome to the Dream Journal with AI! This project aims to provide a platform for logging and analyzing your dreams using AI-powered tools. The repository includes a web application that allows users to create, manage, and analyze their dream entries.
